@@ -1,0 +1,29 @@
+<div style="text-align:center; margin-top: 10px;">
+  <h1>
+    Update Course
+  </h1>
+ </div>
+ <div style="margin:20px 50px 20px 50px;">
+<form #courseform="ngForm" (ngSubmit)="onEdit(courseform)">
+    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedCourse._id">
+    <div class="form-group">
+      <label for="department">Department</label>
+        <select [(ngModel)]="selectedCourse.departmentDetails" name="departmentDetails" class="form-control"> 
+          <option [selected]="selectedCourse.departmentDetails == 'select'" [value]="select">SELECT Department</option>  
+          <option  *ngFor="let dep of departments"  [ngValue]="dep">{{dep.departmentName}}</option>
+        </select>
+    </div>
+  <div class="form-group">
+    <label for="course">Course Code</label>
+    <input required type="text" name="courseCode" #qname="ngModel" ngModel [(ngModel)]="selectedCourse.courseCode" class="form-control" id="inputdefault" placeholder="Course Code">
+  </div>
+  <div class="form-group">
+    <label for="course">Course Name</label>
+    <input required type="text" name="courseTitle" #qname="ngModel" ngModel [(ngModel)]="selectedCourse.courseTitle" class="form-control" id="inputdefault" placeholder="Course Name">
+  </div>
+  <div class="form-group">
+    <input type="submit" class="form-control btn btn-success" id="inputdefault">
+  </div>
+</form>
+</div>
+

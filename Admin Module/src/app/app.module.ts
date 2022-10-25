@@ -34,7 +34,21 @@ import { EditquestionComponent } from './user-profile/editquestion/editquestion.
 import { ViewuserComponent } from './user-profile/viewuser/viewuser.component';
 import { ResultComponent } from './user-profile/result/result.component';
 import { ResdetailComponent } from './user-profile/resdetail/resdetail.component';
-
+import { AdddepartmentComponent } from './user-profile/adddepartment/adddepartment.component';
+import { ViewDepartmentComponent } from './user-profile/view-department/view-department.component';
+import { EditdepartmentComponent } from './user-profile/editdepartment/editdepartment.component';
+import { AddcourseComponent } from './user-profile/addcourse/addcourse.component';
+import { ViewcourseComponent } from './user-profile/viewcourse/viewcourse.component';
+import { EditcourseComponent } from './user-profile/editcourse/editcourse.component';
+import { AddsubjectComponent } from './user-profile/addsubject/addsubject.component';
+import { ViewsubjectComponent } from './user-profile/viewsubject/viewsubject.component';
+import { EditsubjectComponent } from './user-profile/editsubject/editsubject.component';
+import { AddtestComponent } from './user-profile/addtest/addtest.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AmazingTimePickerModule } from 'amazing-time-picker'; 
+import { CustomDateService } from './shared/CustomDateService';
+import { ViewtestComponent } from './user-profile/viewtest/viewtest.component';
+import { EdittestComponent } from './user-profile/edittest/edittest.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,19 +68,33 @@ import { ResdetailComponent } from './user-profile/resdetail/resdetail.component
     EditquestionComponent,
     ViewuserComponent,
     ResultComponent,
-    ResdetailComponent
+    ResdetailComponent,
+    AdddepartmentComponent,
+    ViewDepartmentComponent,
+    EditdepartmentComponent,
+    AddcourseComponent,
+    ViewcourseComponent,
+    EditcourseComponent,
+    AddsubjectComponent,
+    ViewsubjectComponent,
+    EditsubjectComponent,
+    AddtestComponent,
+    ViewtestComponent,
+    EdittestComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot(),
+    AmazingTimePickerModule,
     HttpClientModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }, AuthGuard, UserService , CategoryService, FoodService, QuestionService, VwuserService , ResultService],
+  }, AuthGuard, UserService , CategoryService, FoodService, CustomDateService, QuestionService, VwuserService , ResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

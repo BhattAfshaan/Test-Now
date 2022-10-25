@@ -1,0 +1,32 @@
+<div style="text-align:center; margin-top: 10px;">
+  <h1>
+    Update Test
+  </h1>
+ </div>
+ <div style="margin:20px 50px 20px 50px;">
+<form #examDetailsForm="ngForm" (ngSubmit)="onEdit(examDetailsForm)">
+  <div class="form-group">
+    <label for="question">Test Code</label>
+    <input type="text" name="testCode" #selectedTest.testCode="ngModel" ngModel [(ngModel)]="selectedTest.testCode" class="form-control" id="inputdefault" placeholder="Test Code">
+  </div>
+  <div class="form-group">
+    <label for="question">Test Name</label>
+    <input type="text" name="testName" #selectedTest.testName="ngModel" ngModel [(ngModel)]="selectedTest.testName" class="form-control" id="inputdefault" placeholder="Test Name">
+  </div>
+  <div class="form-group">
+    <label for="selection">Test Date</label>
+    <input (click)="d.toggle()" class="form-control" placeholder="dd-mm-yyyy"  
+    name="examDate" [(ngModel)]="selectedTest.testDate" ngbDatepicker #d="ngbDatepicker">  
+  </div>
+  <div class="form-group">
+    <label for="selection">Start Time</label>
+    <input atp-time-picker type="time" [value]="viewStartTime" (focusin)="open('startTime')" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <label for="selection">End Time</label>
+    <input atp-time-picker type="time" [value]="viewEndTime" (focusin)="open('endTime')" class="form-control"/>
+  </div>
+  <div class="form-group">
+    <input type="submit" class="form-control btn btn-success" id="inputdefault">
+  </div>
+</form>  

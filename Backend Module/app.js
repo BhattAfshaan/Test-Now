@@ -9,10 +9,14 @@ const passport = require('passport');
 
 const rtsIndex = require('./routes/index.router');
 var categoryController=require('./controllers/categoryController.js'); //calling the controller with routing
+var departmentController = require('./controllers/departmentController.js');
 var foodController=require('./controllers/foodController.js');
 var picController=require('./controllers/picController.js');
 var questionController=require('./controllers/questionController.js');
+var courseController=require('./controllers/courseController.js');
+var subjectController=require('./controllers/subjectController.js');
 var userques=require('./controllers/userquesContoller.js');
+var testController=require('./controllers/testController.js');
 var resultController=require('./controllers/resultController.js');
 var viewuserController=require('./controllers/viewuserController.js');
 var userattend=require('./controllers/userattendController.js');
@@ -42,10 +46,14 @@ app.use((err, req, res, next) => {
 // start server
 app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
 app.use('/categories',categoryController);
+app.use('/department',departmentController);
+app.use('/courses',courseController);
+app.use('/subject',subjectController);
 app.use('/foods',foodController);
 app.use('/pics',picController);
 app.use('/question',questionController);
 app.use('/viewques', userques);
+app.use('/test', testController);
 app.use('/result',resultController);
 app.use('/userattend',userattend);
 app.use('/viewuser',viewuserController);

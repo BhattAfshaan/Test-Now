@@ -6,49 +6,58 @@
  </div>
  <div style="margin:20px 50px 20px 50px;">
 <form #questionform="ngForm" (ngSubmit)="onSubmit(questionform)">
-    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedquestion._id">
+    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="question._id">
+    <div class="form-group">
+      <label for="question">Subject</label>
+        <select [(ngModel)]="question.subjectDetails" name="subjectDetails" class="form-control"> 
+          <option [selected]="question.subjectDetails == 'select'" [value]="select">SELECT Subject</option>  
+          <option  *ngFor="let subject of subjects" [ngValue]="subject">{{subject.subjectName}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="question">Unit Name</label>
+      <input type="text" name="unitName" #unitName="ngModel" ngModel [(ngModel)]="question.unitName" class="form-control" id="inputdefault" placeholder="Unit Name">
+    </div>
+    <div class="form-group">
+      <label for="question">Topic Name</label>
+      <input type="text" name="topicName" #topicName="ngModel" ngModel [(ngModel)]="question.topicName" class="form-control" id="inputdefault" placeholder="Topic Name">
+    </div>
+    <div class="form-group">
+      <label for="question">Marks</label>
+      <input type="text" name="marks" #marks="ngModel" ngModel [(ngModel)]="question.marks" class="form-control" id="inputdefault" placeholder="Marks">
+    </div>
   <div class="form-group">
-    <label for="question">Question Name</label>
-    <input type="text" name="qname" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.qname" class="form-control" id="inputdefault" placeholder="question Name">
+    <label for="question">Question Code</label>
+    <input type="text" name="questionCode" #questionCode="ngModel" ngModel [(ngModel)]="question.questionCode" class="form-control" id="inputdefault" placeholder="Question Code">
+  </div>
+  <div class="form-group">
+    <label for="question">Question Description</label>
+    <input type="text" name="questionDescription" #questionDescription="ngModel" ngModel [(ngModel)]="question.questionDescription" class="form-control" id="inputdefault" placeholder="Question Description">
+  </div>
+  <div class="form-group">
+    <label for="question">Option One</label>
+    <input type="text" name="optionOne" #optionOne="ngModel" ngModel [(ngModel)]="question.optionOne" class="form-control" id="inputdefault" placeholder="Option">
   </div>
 
   <div class="form-group">
-    <label for="question">Option 1</label>
-    <input type="text" name="opt1" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.opt1" class="form-control" id="inputdefault" placeholder="question Name">
+    <label for="question">Option Two</label>
+    <input type="text" name="optionTwo" #optionTwo="ngModel" ngModel [(ngModel)]="question.optionTwo" class="form-control" id="inputdefault" placeholder="Option">
   </div>
 
   <div class="form-group">
-    <label for="question">Option 2</label>
-    <input type="text" name="opt2" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.opt2" class="form-control" id="inputdefault" placeholder="question Name">
+    <label for="question">Option Three</label>
+    <input type="text" name="optionThree" #optionThree="ngModel" ngModel [(ngModel)]="question.optionThree" class="form-control" id="inputdefault" placeholder="Option">
   </div>
-
+  
   <div class="form-group">
-    <label for="question">Option 3</label>
-    <input type="text" name="opt3" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.opt3" class="form-control" id="inputdefault" placeholder="question Name">
+    <label for="question">Option Four</label>
+    <input type="text" name="optionFour" #optionFour="ngModel" ngModel [(ngModel)]="question.optionFour" class="form-control" id="inputdefault" placeholder="Option">
   </div>
-
-  <div class="form-group">
-    <label for="question">Option 4</label>
-    <input type="text" name="opt4" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.opt4" class="form-control" id="inputdefault" placeholder="question Name">
-  </div>
-
-
   <div class="form-group">
     <label for="question">Correct Answer</label>
-    <input type="text" name="canswer" #qname="ngModel" ngModel [(ngModel)]="selectedquestion.canswer" class="form-control" id="inputdefault" placeholder="question Name">
+    <input type="text" name="correctAnswer" #correctAnswer="ngModel" ngModel [(ngModel)]="question.correctAnswer" class="form-control" id="inputdefault" placeholder="Correct Answer">
   </div>
-
-
-
-
-
-  <div class="form-group">
-    <label for="Food">Subject</label>
-  		<select [(ngModel)]="selectedquestion.category_id" name="category_id" class="form-control"> 
-				<option [selected]="selectedquestion.category_id == 'select'" [value]="select">SELECT CATEGORY</option>  
-        <option  *ngFor="let cat of category" [value]="cat.categoryname">{{cat.categoryname}}</option>
-			</select>
-	</div>
+ 
   <div class="form-group">
     <input type="submit" class="form-control btn btn-success" id="inputdefault">
   </div>

@@ -5,6 +5,8 @@ import { CategoryService } from '../../shared/category.service';
 import { Category} from '../../shared/categoty.model';
 import { QuestionService } from '../../shared/question.service';
 import { Question} from '../../shared/question1.model';
+import { SubjectService } from '../../shared/subjectService';
+import { Subject } from '../../shared/subjectModel';
 
 
 @Component({
@@ -13,32 +15,36 @@ import { Question} from '../../shared/question1.model';
   styleUrls: ['./addquestion.component.css']
 })
 export class AddquestionComponent implements OnInit {
-  public selectedquestion = new Question();
-  public category = [];
-  constructor(private catservice: CategoryService, private qservice: QuestionService, private router:Router) { }
+  // public selectedquestion = new Question();
+  public question = new Question();
+  public subjects = [];
+  constructor(private subjectService: SubjectService, private qservice: QuestionService, private router:Router) { }
 
   ngOnInit() {
-    this.getCategory();
+    this.getSubjects();
   }
 
-  getCategory() {
-    this.catservice.getCategory().subscribe((res) => {
-    this.category = res as Category[];
-    });
+  getSubjects() {
+    this.subjectService.getSubjects().
+    subscribe(
+      (data: Subject[]) => {
+        this.subjects = data
+      }, 
+      error => console.error('Error', error)
+    );
   }
 
   onSubmit(form: NgForm) {
-    if (form.value._id === '' || form.value._id == null) {
-   this.qservice.insertquestion(this.selectedquestion).
+    console.log(form.value)
+
+   this.qservice.insertquestion(this.question).
    subscribe(
      data => console.log('Success', data),
      error => console.error('Error', error)
    );
    alert(' Data Saved Successfully ');
    this.router.navigateByUrl('userprofile/Viewq');
-    } else {
-      console.log(form.value);
-    }
+     
    }
 
 }

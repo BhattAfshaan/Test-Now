@@ -4,6 +4,7 @@ const router = express.Router();
 const ctrlUser = require('../controllers/user.controller');
 const stuuser = require('../controllers/reguser.controller');
 var viewques = require('../controllers/userquesContoller');
+var department = require('../controllers/departmentController');
 
 const jwtHelper = require('../config/jwtHelper');
 router.post('/register1',stuuser.register1);

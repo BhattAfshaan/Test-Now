@@ -1,0 +1,21 @@
+<div style="text-align:center">
+  <h1>
+    Update Department 
+  </h1>
+ </div>
+ <div style="margin:20px 50px 20px 50px;">
+<form #categoryform="ngForm" (ngSubmit)="onEdit(categoryform)">
+    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedDepartment._id">
+  <div class="form-group">
+    <label for="department">Department Code</label>
+    <input type="text" name="departmentCode" #qname="ngModel" ngModel [(ngModel)]="selectedDepartment.departmentCode" class="form-control" id="inputdefault" placeholder="Category Name">
+  </div>
+  <div class="form-group">
+    <label for="department">Department Name</label>
+    <input type="text" name="departmentName" #qname="ngModel" ngModel [(ngModel)]="selectedDepartment.departmentName" class="form-control" id="inputdefault" placeholder="Category Name">
+  </div>
+  <div class="form-group">
+    <input type="submit" class="form-control btn btn-success" id="inputdefault">
+  </div>
+</form>
+</div>
