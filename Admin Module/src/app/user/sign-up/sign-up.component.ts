@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from '../../shared/alertService';
 
 import { UserService } from '../../shared/user.service'
 
@@ -13,7 +15,7 @@ export class SignUpComponent implements OnInit {
   showSucessMessage: boolean;
   serverErrorMessages: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private alertService:AlertService, private router:Router) { }
 
   ngOnInit() {
   }
@@ -21,16 +23,23 @@ export class SignUpComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.postUser(form.value).subscribe(
       res => {
-        this.showSucessMessage = true;
-        setTimeout(() => this.showSucessMessage = false, 4000);
-        this.resetForm(form);
+        // this.showSucessMessage = true;
+        // setTimeout(() => this.showSucessMessage = false, 4000);
+        this.alertService.showSuccessAlert(()=>{
+          this.resetForm(form)
+          this.router.navigateByUrl("/login")
+        }, true)
       },
       err => {
-        if (err.status === 422) {
-          this.serverErrorMessages = err.error.join('<br/>');
-        }
-        else
-          this.serverErrorMessages = 'Something went wrong.Please contact admin.';
+        this.alertService.showSuccessAlert(()=>{
+          this.resetForm(form)
+          
+        }, false)
+        // if (err.status === 422) {
+        //   this.serverErrorMessages = err.error.join('<br/>');
+        // }
+        // else
+        //   this.serverErrorMessages = 'Something went wrong.Please contact admin.';
       }
     );
   }
