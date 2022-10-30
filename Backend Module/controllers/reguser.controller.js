@@ -6,6 +6,8 @@ const Reguser = mongoose.model('Reguser');
 
 module.exports.register1 = (req, res, next) => {
     var reguser = new Reguser();
+    reguser.department = req.body.department;
+    reguser.course = req.body.course;
     reguser.fullName = req.body.fullName;
     reguser.email = req.body.email;
     reguser.phone = req.body.phone;
@@ -42,7 +44,8 @@ module.exports.reguserProfile1 = (req, res, next) =>{
             if (!reguser)
                 return res.status(404).json({ status: false, message: 'reguser record not found.' });
             else
-                return res.status(200).json({ status: true, reguser : _.pick(reguser,['fullName','email']) });
+                // return res.status(200).json({ status: true, reguser : _.pick(reguser,['fullName','email']) });
+                 return res.status(200).json({ status: true, reguser : _.pick(reguser,['fullName','email', 'course','']) });
         }
     );
 }

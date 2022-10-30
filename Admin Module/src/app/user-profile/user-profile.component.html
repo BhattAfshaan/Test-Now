@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center ">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Test Now</a>
-  
+    <div (click)="viewScheduledTests()">
+      <a class="navbar-brand" style="color: #fff; cursor: pointer;">Test Now</a>
+    </div>
     <!-- Links -->
     <ul class="navbar-nav">
       <!-- Dropdown -->
@@ -37,30 +38,7 @@
         </div>
       </li>
   
-      <!-- Dropdown -->
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Category
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" routerLink="AddCategory">Add Category</a>
-          <a class="dropdown-item" routerLink="ViewCategory">View Category</a>
-        </div>
-      </li> -->
-
-      <!--Food Menu
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Food
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" routerLink="AddFood">Add Food</a>
-          <a class="dropdown-item" routerLink="ViewFood">View Food</a>
-        </div>
-      </li>
-
-      End Food Menu-->
-      <!--question menu-->
+     
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           Question
@@ -70,8 +48,7 @@
           <a class="dropdown-item" routerLink="Viewq">View Question</a>
         </div>
       </li>
-      <!--Question menu -->
-      <!--question menu-->
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           Test
@@ -81,13 +58,13 @@
           <a class="dropdown-item" routerLink="ViewTest">View Test</a>
         </div>
       </li>
-      <!--Question menu -->
-      <li class="nav-item">
+ 
+      <!-- <li class="nav-item">
         <a class="nav-link" routerLink="viewuser">View Users</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="result">Result</a>
-      </li>
+      </li> -->
 
       <li *ngIf="userDetails" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:aquamarine">
@@ -100,4 +77,5 @@
 
     </ul>
   </nav>
+  
 <router-outlet></router-outlet>

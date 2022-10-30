@@ -12,6 +12,8 @@ import { CustomDateService } from '../../shared/CustomDateService';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 import { Test } from '../../shared/testModel';
 import { TestService } from '../../shared/testService';
+import { Router } from '@angular/router';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-addtest',
@@ -45,6 +47,8 @@ export class AddtestComponent implements OnInit {
     private atp: AmazingTimePickerService,
     private questionService: QuestionService,
     private customDateService: CustomDateService,
+    private router:Router,
+    private alertService:AlertService,
     private testService: TestService) { }
 
   ngOnInit() {
@@ -119,14 +123,22 @@ export class AddtestComponent implements OnInit {
 
   onDetailsSubmit(form:NgForm){
     this.test.testDate = this.getFormattedDate()
-    console.log(this.test)
-    this.testService.insertTest(this.test).
-    subscribe(
-      (data) => {
-        console.log(data)
+    this.testService.insertTest(this.test).subscribe(
+      (response) => {
+       if(response) {
+         this.alertService.showSuccessAlert(() => {
+           this.router.navigateByUrl('userprofile/ViewTest')
+         },true)
+       }
+       else {
+         this.alertService.showErrorAlert()
+       }
       }, 
-      error => console.error('Error', error)
-    );
+      (_error) => {
+       this.alertService.showErrorAlert()
+      })
+
+ 
   }
 
   getFormattedDate(): string {

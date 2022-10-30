@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TestService } from '../../shared/testService';
 import { Test } from '../../shared/testModel';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-viewtest',
@@ -10,7 +11,7 @@ import { Test } from '../../shared/testModel';
 export class ViewtestComponent implements OnInit {
 
   tests: Test[]= []
-  constructor(private testService:TestService) { }
+  constructor(private testService:TestService, private alertService:AlertService) { }
 
   ngOnInit() {
     this.getTests()
@@ -29,9 +30,17 @@ export class ViewtestComponent implements OnInit {
     this.testService.deleteTestByID(id).
     subscribe(
       (response) => {
-      console.log(response)
-      }, 
-      error => console.error('Error', error)
-    );
+        if(response) {
+          this.alertService.showSuccessAlert(() => {
+            this.getTests()
+          },false)
+        }
+        else {
+          this.alertService.showErrorAlert()
+        }
+       }, 
+       (_error) => {
+        this.alertService.showErrorAlert()
+       })
   }
 }

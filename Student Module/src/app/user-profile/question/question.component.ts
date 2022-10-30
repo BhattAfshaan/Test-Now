@@ -14,26 +14,30 @@ export class QuestionComponent implements OnInit {
   public category = '';
   userDetails = new User();
   public questions = [];
-  @Input() childMessage: string;
+  // @Input() questions: [];
   constructor(private route: ActivatedRoute , private qservice: QuestionService , private userService: UserService ,
     private router: Router) { }
 
   ngOnInit() {
-    this.category = this.route.snapshot.paramMap.get('category_id');
-    this.getques(this.category);
-    this.userService.getUserProfile().subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    );
-    console.log(this.userDetails);
+    this.route.queryParams.subscribe(params => {
+    
+      this.questions = JSON.parse(params["user"])
+    });
+   
+    // this.getques(this.category);
+    // this.userService.getUserProfile().subscribe(
+    //   res => {
+    //     console.log(res);
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
+    // console.log(this.userDetails);
   }
-  getques(category) {
-    this.qservice.getques(category).subscribe((res) => {
-      this.questions = res as Question[];
-      });
-  }
+  // getques(category) {
+  //   this.qservice.getques(category).subscribe((res) => {
+  //     this.questions = res as Question[];
+  //     });
+  // }
 }

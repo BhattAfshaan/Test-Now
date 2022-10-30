@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from '../../shared/subjectService';
 import { Subject } from '../../shared/subjectModel';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-viewsubject',
@@ -10,7 +11,7 @@ import { Subject } from '../../shared/subjectModel';
 export class ViewsubjectComponent implements OnInit {
 
   subjects: Subject[]= []
-  constructor(private subjectService:SubjectService) { }
+  constructor(private subjectService:SubjectService, private alertService:AlertService) { }
 
   ngOnInit() {
     this.getCourses()
@@ -29,10 +30,18 @@ export class ViewsubjectComponent implements OnInit {
     this.subjectService.deleteSubjectByID(id).
     subscribe(
       (response) => {
-      console.log(response)
-      }, 
-      error => console.error('Error', error)
-    );
+        if(response) {
+          this.alertService.showSuccessAlert(() => {
+            this.getCourses()
+          },false)
+        }
+        else {
+          this.alertService.showErrorAlert()
+        }
+       }, 
+       (_error) => {
+        this.alertService.showErrorAlert()
+       })
   }
   
 }

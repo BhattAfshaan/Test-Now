@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Department } from '../../shared/departmentModel';
+import { DepartmentService } from '../../shared/departmentService';
+import { Category } from '../../shared/category.model';
+import { CategoryService } from '../../shared/category.service';
 
 import { UserService } from '../../shared/user.service'
+import { Course } from '../../shared/courseModel';
+import { CourseService } from '../../shared/courseService';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,10 +18,27 @@ export class SignUpComponent implements OnInit {
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   showSucessMessage: boolean;
   serverErrorMessages: string;
+  categories: Category[]= []
+  departments: Department[]= []
+  courses: Course[]= []
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private departmentService: DepartmentService, private courseService: CourseService) { }
 
   ngOnInit() {
+    this.getDepartments()
+  }
+
+  getDepartments() {
+    this.departmentService.getDepartments().subscribe((res) => {
+    this.departments = res as Department[];
+    this.getCourses()
+    });
+  }
+
+  getCourses() {
+    this.courseService.getCourses().subscribe((res) => {
+    this.courses = res as Course[];
+    });
   }
 
   onSubmit(form: NgForm) {
@@ -37,6 +60,8 @@ export class SignUpComponent implements OnInit {
 
   resetForm(form: NgForm) {
     this.userService.selectedUser = {
+      department:'',
+      course:'',
       fullName: '',
       email: '',
       phone: '',

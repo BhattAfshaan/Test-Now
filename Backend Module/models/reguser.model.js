@@ -3,6 +3,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 var reguserSchema = new mongoose.Schema({
+    department: {
+        type: {},
+        required: 'Department can\'t be empty'
+    },
+    course: {
+        type: {},
+        required: 'Course can\'t be empty'
+    },
     fullName: {
         type: String,
         required: 'Full name can\'t be empty'

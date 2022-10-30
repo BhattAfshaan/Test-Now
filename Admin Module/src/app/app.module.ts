@@ -49,6 +49,29 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { CustomDateService } from './shared/CustomDateService';
 import { ViewtestComponent } from './user-profile/viewtest/viewtest.component';
 import { EdittestComponent } from './user-profile/edittest/edittest.component';
+import { ScheduledTestsComponent } from './user-profile/scheduled-tests/scheduled-tests.component';
+import { ScheduledTestQuestionsComponent } from './user-profile/scheduled-test-questions/scheduled-test-questions.component'
+
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule } from 'ngx-ui-loader';
+
+// const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+//   bgsColor: 'rgba(12,80,219,0.98)',
+//   bgsOpacity: 1,
+//   bgsPosition: POSITION.bottomRight,
+//   bgsSize: 40,
+//   bgsType: SPINNER.threeStrings,
+//   fgsColor: 'rgba(12,80,219,0.98)',
+//   fgsPosition: POSITION.centerCenter
+//   };
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: 'red',
+  bgsPosition: POSITION.bottomCenter,
+  bgsSize: 40,
+  bgsType: SPINNER.circle,
+  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+  pbThickness: 2, // progress bar thickness
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,13 +103,18 @@ import { EdittestComponent } from './user-profile/edittest/edittest.component';
     EditsubjectComponent,
     AddtestComponent,
     ViewtestComponent,
-    EdittestComponent
+    EdittestComponent,
+    ScheduledTestsComponent,
+    ScheduledTestQuestionsComponent,
+    ScheduledTestQuestionsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule,
     AmazingTimePickerModule,
     HttpClientModule
   ],

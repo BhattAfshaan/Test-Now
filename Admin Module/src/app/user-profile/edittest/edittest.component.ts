@@ -5,6 +5,7 @@ import { CustomDateService } from '../../shared/CustomDateService';
 import { Test } from '../../shared/testModel';
 import { NgForm } from '@angular/forms';
 import { AmazingTimePickerService } from 'amazing-time-picker';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-edittest',
@@ -20,7 +21,9 @@ export class EdittestComponent implements OnInit {
   viewEndTime: any
   time: any;
   time24: any;
-  constructor(private route: ActivatedRoute, private atp: AmazingTimePickerService, private router: Router, private testService: TestService,  private customDateService: CustomDateService) { }
+  constructor(private route: ActivatedRoute,
+     private atp: AmazingTimePickerService,
+     private alertService:AlertService, private router: Router, private testService: TestService,  private customDateService: CustomDateService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -40,15 +43,13 @@ export class EdittestComponent implements OnInit {
   onEdit(form: NgForm) {
     this.selectedTest.testDate = this.getFormattedDate()
     console.log(this.selectedTest)
-    if (confirm('Are you sure to Update this record ?') === true) {
+    
+    this.alertService.showSuccessAlert(() => {
       this.testService.updateTest(this.selectedTest).subscribe((res) => {
         console.log(res);
       });
       this.router.navigateByUrl('userprofile/ViewTest');
-    } else {
-      this.router.navigate ( [ '/EditTest', this.id ] );
-      this.refresh();
-    }
+    },false)
     }
     refresh() {
       this.id = this.route.snapshot.paramMap.get('id');

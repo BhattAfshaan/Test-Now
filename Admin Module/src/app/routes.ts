@@ -29,6 +29,8 @@ import { EditsubjectComponent } from './user-profile/editsubject/editsubject.com
 import { AddtestComponent } from './user-profile/addtest/addtest.component';
 import { ViewtestComponent } from './user-profile/viewtest/viewtest.component';
 import { EdittestComponent } from './user-profile/edittest/edittest.component';
+import { ScheduledTestsComponent } from './user-profile/scheduled-tests/scheduled-tests.component';
+import { ScheduledTestQuestionsComponent } from './user-profile/scheduled-test-questions/scheduled-test-questions.component';
 
 export const appRoutes: Routes = [
     {
@@ -43,6 +45,8 @@ export const appRoutes: Routes = [
         // path: 'userprofile', component: UserProfileComponent, canActivate: [AuthGuard],
         path: 'userprofile', component: UserProfileComponent,
         children: [
+        { path: 'Tests', component: ScheduledTestsComponent  },
+        { path: 'questions', component: ScheduledTestQuestionsComponent  },
         { path: 'AddCategory', component: AddcategoryComponent  },
         { path: 'ViewCategory', component: ViewcategoryComponent },
         { path: 'EditCategory/:id', component : EditcategoryComponent},

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alertService';
 import { Department } from 'src/app/shared/departmentModel';
-import { DepartmentService } from 'src/app/shared/departmentService';
+
+import { DepartmentService } from '../../shared/departmentService';
+
 
 @Component({
   selector: 'app-adddepartment',
@@ -10,26 +13,30 @@ import { DepartmentService } from 'src/app/shared/departmentService';
   styleUrls: ['./adddepartment.component.css']
 })
 export class AdddepartmentComponent implements OnInit {
-  public department = new Department();
-  constructor(private departmentService: DepartmentService, private router: Router) { }
+  public department = new Department()
+  constructor(
+    private departmentService: DepartmentService,
+    private router: Router,
+    private alertService: AlertService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
   onSubmit(form: NgForm) {
-    console.log(form)
-    console.log(this.department)
-  //   if (form.value._id === '' || form.value._id == null) {
-   this.departmentService.insertDepartment(this.department).
-   subscribe(
-     data => console.log('Success', data),
-     error => console.error('Error', error)
-   );
-   alert(' Data Saved Successfully ');
-  // //  this.router.navigateByUrl('userprofile/ViewCategory');
-  //   } else {
-  //     console.log(form.value);
-  //   }
-   }
-
+   this.departmentService.insertDepartment(this.department).subscribe(
+     (response) => {
+      if(response) {
+        this.alertService.showSuccessAlert(() => {
+          this.router.navigateByUrl('userprofile/ViewDepartment')
+        },true)
+      }
+      else {
+        this.alertService.showErrorAlert()
+      }
+     }, 
+     (_error) => {
+      this.alertService.showErrorAlert()
+     })
+  }
+  
 
 }

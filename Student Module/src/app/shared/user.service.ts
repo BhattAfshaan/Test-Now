@@ -9,6 +9,8 @@ import { User } from './user.model';
 })
 export class UserService {
   selectedUser: User = {
+    department:'',
+    course:'',
     fullName: '',
     email: '',
     phone: '',

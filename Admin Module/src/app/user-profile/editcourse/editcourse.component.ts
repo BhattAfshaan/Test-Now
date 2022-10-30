@@ -5,6 +5,7 @@ import { Course } from '../../shared/courseModel';
 import { NgForm } from '@angular/forms';
 import { DepartmentService } from '../../shared/departmentService';
 import { Department } from '../../shared/departmentModel';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-editcourse',
@@ -17,7 +18,9 @@ export class EditcourseComponent implements OnInit {
   public selectedDepartment= new Department();
   departments:Department[]= []
   public id = '';
-  constructor(private route: ActivatedRoute, private router: Router, private courseService: CourseService, public departmentService:DepartmentService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+     private courseService: CourseService, public departmentService:DepartmentService,
+     private alertService:AlertService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -36,28 +39,32 @@ export class EditcourseComponent implements OnInit {
         console.log(err);
       });
   }
+
   getDepartments() {
-    this.departmentService.getDepartments().subscribe((res:Department[]) => {
+    this.departmentService.getDepartments().subscribe((res: Department[]) => {
       console.log(res)
       this.departments = res
-      // this.selectedDepartment = this.departments.filter((item)=> item._id == this.selectedCourse.departmentDetails._id)[0]
-      // console.log(this.selectedDepartment)
-      // this.selectedDepartment = res as Department;
-      // console.log(this.selectedDepartment);
     }, (err) => {
       console.log(err);
-    });
-}
+    })
+  }
+
   onEdit(form: NgForm) {
-    if (confirm('Are you sure to Update this record ?') === true) {
+    this.alertService.showSuccessAlert(() => {
       this.courseService.updateCourse(form.value).subscribe((res) => {
         console.log(res);
       });
       this.router.navigateByUrl('userprofile/ViewCourse');
-    } else {
-      this.router.navigate ( [ '/EditCourse', this.id ] );
-      this.refresh();
-    }
+    },false)
+    // if (confirm('Are you sure to Update this record ?') === true) {
+    //   this.courseService.updateCourse(form.value).subscribe((res) => {
+    //     console.log(res);
+    //   });
+    //   this.router.navigateByUrl('userprofile/ViewCourse');
+    // } else {
+    //   this.router.navigate ( [ '/EditCourse', this.id ] );
+    //   this.refresh();
+    // }
     }
     refresh() {
       this.id = this.route.snapshot.paramMap.get('id');

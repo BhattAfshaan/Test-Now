@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="department">Department</label>
         <select [(ngModel)]="selectedCourse.departmentDetails" name="departmentDetails" class="form-control"> 
-          <option [selected]="selectedCourse.departmentDetails == 'select'" [value]="select">SELECT Department</option>  
+          <option [selected]="selectedCourse.departmentDetails == 'select'" [value]="select">SELECT Department</option> 
           <option  *ngFor="let dep of departments"  [ngValue]="dep">{{dep.departmentName}}</option>
         </select>
     </div>

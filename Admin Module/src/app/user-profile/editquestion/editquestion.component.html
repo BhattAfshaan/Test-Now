@@ -1,9 +1,9 @@
 
-<div style="text-align:center">
+<div style="text-align:center; margin-top: 10px;">
   <h1>
-    Update Question 
+    Update Question
   </h1>
- </div>
+</div>
  <div style="margin:20px 50px 20px 50px;">
 <form #questionform="ngForm" (ngSubmit)="onEdit(questionform)">
     <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedquestion._id">

@@ -10,7 +10,7 @@ const passport = require('passport');
 const rtsIndex = require('./routes/index.router');
 var categoryController=require('./controllers/categoryController.js'); //calling the controller with routing
 var departmentController = require('./controllers/departmentController.js');
-var foodController=require('./controllers/foodController.js');
+// var foodController=require('./controllers/foodController.js');
 var picController=require('./controllers/picController.js');
 var questionController=require('./controllers/questionController.js');
 var courseController=require('./controllers/courseController.js');
@@ -49,7 +49,7 @@ app.use('/categories',categoryController);
 app.use('/department',departmentController);
 app.use('/courses',courseController);
 app.use('/subject',subjectController);
-app.use('/foods',foodController);
+// app.use('/foods',foodController);
 app.use('/pics',picController);
 app.use('/question',questionController);
 app.use('/viewques', userques);

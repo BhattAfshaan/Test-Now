@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { AlertService } from '../../shared/alertService';
 import { QuestionService } from '../../shared/question.service';
 import { Question } from '../../shared/question1.model';
 
@@ -10,7 +11,7 @@ import { Question } from '../../shared/question1.model';
 })
 export class ViewquestionComponent implements OnInit {
   public questions =[];
-  constructor(private router:Router,private qservice:QuestionService) { }
+  constructor(private router:Router,private qservice:QuestionService, private alertService:AlertService) { }
 
   ngOnInit() {
     this.getquestion();
@@ -30,12 +31,27 @@ export class ViewquestionComponent implements OnInit {
     });
   }
   onDelete(_id: string) {
-    if (confirm('Are you sure to delete this record ?') === true) {
-      this.qservice.deletequestion(_id).subscribe((res) => {
-      });
-      this.router.navigateByUrl('userprofile/Viewq');
-      this.refresh();
-    }
+    // if (confirm('Are you sure to delete this record ?') === true) {
+    //   this.qservice.deletequestion(_id).subscribe((res) => {
+    //   });
+    //   this.router.navigateByUrl('userprofile/Viewq');
+    //   this.refresh();
+    // }
+    this.qservice.deletequestion(_id).
+    subscribe(
+      (response) => {
+        if(response) {
+          this.alertService.showSuccessAlert(() => {
+            this.getquestion()
+          },false)
+        }
+        else {
+          this.alertService.showErrorAlert()
+        }
+       }, 
+       (_error) => {
+        this.alertService.showErrorAlert()
+       })
   }
 
 }

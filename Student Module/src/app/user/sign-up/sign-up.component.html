@@ -1,7 +1,13 @@
-<div>
+<!-- <div>
   <img src="/assets/img/users.png" id="icon" alt="User Icon" />
-</div>
+</div> -->
 <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+  <div class="form-group">
+    <select [(ngModel)]="userService.selectedUser.course" name="course" class="form-control" placeholder="Select course"> 
+      <option [selected]="userService.selectedUser.course == 'select'" [value]="select">Select course</option>  
+      <option *ngFor="let course of courses" [ngValue]="course">{{course.courseTitle}}</option>
+    </select>
+</div>
   <input type="text" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName" name="fullName" placeholder="Full Name"
   required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fullName.valid }">
   <div *ngIf="signUpForm.submitted && !fullName.valid">

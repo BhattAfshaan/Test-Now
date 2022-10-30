@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../shared/alertService';
 import { Department } from '../../shared/departmentModel';
 import { DepartmentService } from '../../shared/departmentService';
 
@@ -13,7 +14,7 @@ export class EditdepartmentComponent implements OnInit {
 
   public selectedDepartment = new Department();
   public id = '';
-  constructor(private route: ActivatedRoute, private router: Router, private departmentService: DepartmentService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private departmentService: DepartmentService,private alertService: AlertService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -28,16 +29,20 @@ export class EditdepartmentComponent implements OnInit {
       });
   }
   onEdit(form: NgForm) {
-    if (confirm('Are you sure to Update this record ?') === true) {
+    this.alertService.showSuccessAlert(() => {
       this.departmentService.updateDepartment(form.value).subscribe((res) => {
         console.log(res);
       });
       this.router.navigateByUrl('userprofile/ViewDepartment');
-    } else {
-      this.router.navigate ( [ '/EditDepartment', this.id ] );
-      this.refresh();
+    },false)
+    // if (confirm('Are you sure to Update this record ?') === true) {
+     
+    // } else {
+    //   this.router.navigate ( [ '/EditDepartment', this.id ] );
+    //   this.refresh();
+    // }
     }
-    }
+
     refresh() {
       this.id = this.route.snapshot.paramMap.get('id');
       this.getDepartmentByID(this.id);

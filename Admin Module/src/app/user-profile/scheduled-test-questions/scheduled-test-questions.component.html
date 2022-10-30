@@ -1,0 +1,49 @@
+
+
+<div style="border: 2px solid cornflowerblue; margin:10px;border-radius: 10px;">
+  <div style="margin: 10px;">
+    <div style="display: flex;align-items:baseline;justify-content:start;">
+      <h5>Total number of questions : </h5>
+      <span style="font-size: 18px; font-weight:400;margin-left:10px;">{{questions.length}}</span>
+    </div>
+    <div style="display: flex;align-items:baseline;justify-content:start;">
+      <h5>Total marks :</h5>
+      <span style="font-size: 18px; font-weight:400;margin-left:10px;">{{maxMarks}}</span>
+    </div>
+  </div>
+ 
+</div>
+<h3 style="margin: 14px;">Questions</h3>
+<div style="margin: 14px;">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Unit Name</th>
+        <th scope="col">Topic</th>
+        <th scope="col">Question Code</th>
+        <th scope="col">Description</th>
+       
+        <th scope="col">Option One</th>
+        <th scope="col">Option Two</th>
+        <th scope="col">Option Three</th>
+        <th scope="col">Option Four</th>
+        <th scope="col">Correct Answer</th>
+        <th scope="col">Marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of questions">
+        <th >{{question.unitName}}</th>
+        <td>{{question.topicName}}</td>
+        <td>{{question.questionCode}}</td>
+        <td>{{question.questionDescription}}</td>
+        <td>{{question.optionOne}}</td>
+        <td>{{question.optionTwo}}</td>
+        <td>{{question.optionThree}}</td>
+        <td>{{question.optionFour}}</td>
+        <td>{{question.correctAnswer}}</td>
+        <td>{{question.marks}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

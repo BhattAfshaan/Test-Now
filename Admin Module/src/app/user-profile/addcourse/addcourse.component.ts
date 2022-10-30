@@ -5,6 +5,7 @@ import { Course } from '../../shared/courseModel';
 import { Router } from '@angular/router';
 import { DepartmentService } from '../../shared/departmentService';
 import { Department } from '../../shared/departmentModel';
+import { AlertService } from '../../shared/alertService';
 
 @Component({
   selector: 'app-addcourse',
@@ -14,7 +15,8 @@ import { Department } from '../../shared/departmentModel';
 export class AddcourseComponent implements OnInit {
   departments: Department[]= []
   public course =new Course()
-  constructor(private courseService: CourseService, private router: Router, private departmentService: DepartmentService) { }
+  constructor(private courseService: CourseService, private router: Router, private departmentService: DepartmentService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.getDepartments()
@@ -35,19 +37,21 @@ export class AddcourseComponent implements OnInit {
     );
   }
   onSubmit(form: NgForm) {
-    console.log(form)
-    console.log(this.course)
-  //   if (form.value._id === '' || form.value._id == null) {
-   this.courseService.insertCourse(this.course).
-   subscribe(
-     data => console.log('Success', data),
-     error => console.error('Error', error)
-   );
-  //  alert(' Data Saved Successfully ');
-  // //  this.router.navigateByUrl('userprofile/ViewCategory');
-  //   } else {
-  //     console.log(form.value);
-  //   }
+   
+   this.courseService.insertCourse(this.course).subscribe(
+    (response) => {
+     if(response) {
+       this.alertService.showSuccessAlert(() => {
+         this.router.navigateByUrl('userprofile/ViewCourse')
+       },true)
+     }
+     else {
+       this.alertService.showErrorAlert()
+     }
+    }, 
+    (_error) => {
+     this.alertService.showErrorAlert()
+    })
    }
 
 }
