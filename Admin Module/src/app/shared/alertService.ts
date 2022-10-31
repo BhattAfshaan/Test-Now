@@ -33,15 +33,15 @@ export class AlertService {
   }
 
   showErrorAlert() {
-    // Swal.fire({
-    //   title: 'Error',
-    //   text: 'Some error occurred',
-    //   icon: 'error',
-    //   showConfirmButton: true,
-    //   confirmButtonText: 'Ok',
-    //   backdrop: true,
-    //   allowOutsideClick: false
-    // })
+    Swal.fire({
+      title: 'Error',
+      text: 'Some error occurred',
+      icon: 'error',
+      showConfirmButton: true,
+      confirmButtonText: 'Ok',
+      backdrop: true,
+      allowOutsideClick: false
+    })
   }
   
 }
