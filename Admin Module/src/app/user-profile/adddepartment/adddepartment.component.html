@@ -1,8 +1,9 @@
 <div style="text-align: center; margin-top: 10px">
   <h1>Add Department</h1>
 </div>
+
 <div style="margin: 20px 50px 20px 50px">
-  <form #departmentform="ngForm" (ngSubmit)="onSubmit(departmentform)">
+  <form #departmentForm="ngForm" (ngSubmit)="onSubmit(departmentForm)">
     <input
       type="hidden"
       name="_id"
@@ -19,22 +20,24 @@
         #departmentCode="ngModel"
         ngModel
         [(ngModel)]="department.departmentCode"
+        [ngClass]="{
+          'is-invalid':
+            !departmentCode?.valid &&
+            (departmentCode?.dirty || departmentCode?.touched)
+        }"
         class="form-control"
         id="inputdefault"
         placeholder="Department Code"
       />
-    </div>
-    <div>
-      <ng-container>
-        <div
-          *ngIf="
-            !departmentCode?.valid &&
-            (departmentCode?.dirty || departmentCode?.touched)
-          "
-        >
-          <span style="color: crimson">Department code is required</span>
-        </div>
-      </ng-container>
+      <div
+        *ngIf="
+          !departmentCode?.valid &&
+          (departmentCode?.dirty || departmentCode?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Department code is required</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="department">Department Name</label>
@@ -45,13 +48,28 @@
         #departmentName="ngModel"
         ngModel
         [(ngModel)]="department.departmentName"
+        [ngClass]="{
+          'is-invalid':
+            !departmentName?.valid &&
+            (departmentName?.dirty || departmentName?.touched)
+        }"
         class="form-control"
         id="inputdefault"
         placeholder="Department Name"
       />
+      <div
+        *ngIf="
+          !departmentName?.valid &&
+          (departmentName?.dirty || departmentName?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Department name is required</span>
+      </div>
     </div>
     <div class="form-group">
       <input
+        [disabled]="!departmentForm.valid"
         type="submit"
         class="form-control btn btn-success"
         id="inputdefault"

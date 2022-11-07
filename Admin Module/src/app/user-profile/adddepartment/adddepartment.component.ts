@@ -19,31 +19,22 @@ export class AdddepartmentComponent implements OnInit {
     private alertService: AlertService
   ) {}
 
-  validationMessages = {
-    departmentCode: [
-      { type: "required", message: "Department code is required" },
-    ],
-  };
   ngOnInit() {}
 
-  onSubmit(form: NgForm) {
-    console.log(form);
-    if (!form.valid) {
-      form.touched;
-    }
-    // this.departmentService.insertDepartment(this.department).subscribe(
-    //   (response) => {
-    //     if (response) {
-    //       this.alertService.showSuccessAlert(() => {
-    //         this.router.navigateByUrl("userprofile/ViewDepartment");
-    //       }, true);
-    //     } else {
-    //       this.alertService.showErrorAlert();
-    //     }
-    //   },
-    //   (_error) => {
-    //     this.alertService.showErrorAlert();
-    //   }
-    // );
+  onSubmit() {
+    this.departmentService.insertDepartment(this.department).subscribe(
+      (response) => {
+        if (response) {
+          this.alertService.showSuccessAlert(() => {
+            this.router.navigateByUrl("userprofile/ViewDepartment");
+          }, true);
+        } else {
+          this.alertService.showErrorAlert();
+        }
+      },
+      (_error) => {
+        this.alertService.showErrorAlert();
+      }
+    );
   }
 }
