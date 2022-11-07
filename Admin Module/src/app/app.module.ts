@@ -22,12 +22,6 @@ import { ResultService} from './shared/result.service';
 //other
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { AddcategoryComponent } from './user-profile/addcategory/addcategory.component';
-import { ViewcategoryComponent } from './user-profile/viewcategory/viewcategory.component';
-import { EditcategoryComponent } from './user-profile/editcategory/editcategory.component';
-import { AddfoodComponent } from './user-profile/addfood/addfood.component';
-import { ViewfoodComponent } from './user-profile/viewfood/viewfood.component';
-import { EditfoodComponent } from './user-profile/editfood/editfood.component';
 import { AddquestionComponent } from './user-profile/addquestion/addquestion.component';
 import { ViewquestionComponent } from './user-profile/viewquestion/viewquestion.component';
 import { EditquestionComponent } from './user-profile/editquestion/editquestion.component';
@@ -45,7 +39,7 @@ import { ViewsubjectComponent } from './user-profile/viewsubject/viewsubject.com
 import { EditsubjectComponent } from './user-profile/editsubject/editsubject.component';
 import { AddtestComponent } from './user-profile/addtest/addtest.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AmazingTimePickerModule } from 'amazing-time-picker'; 
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { CustomDateService } from './shared/CustomDateService';
 import { ViewtestComponent } from './user-profile/viewtest/viewtest.component';
 import { EdittestComponent } from './user-profile/edittest/edittest.component';
@@ -79,13 +73,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SignUpComponent,
     UserProfileComponent,
     SignInComponent,
-    AddcategoryComponent,
-    ViewcategoryComponent,
-    EditcategoryComponent,
-    AddfoodComponent,
-    ViewfoodComponent,
-    EditfoodComponent,
-    FileSelectDirective,
+    // FileSelectDirective,
     AddquestionComponent,
     ViewquestionComponent,
     EditquestionComponent,
