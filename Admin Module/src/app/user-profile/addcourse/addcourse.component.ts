@@ -41,8 +41,7 @@ export class AddcourseComponent implements OnInit {
     );
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form);
+  onSubmit() {
     this.courseService.insertCourse(this.course).subscribe(
       (response) => {
         if (response) {
@@ -51,7 +50,6 @@ export class AddcourseComponent implements OnInit {
           }, true);
         } else {
           this.alertService.showErrorAlert();
-          console.log("hi");
         }
       },
       (_error) => {

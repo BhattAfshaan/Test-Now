@@ -1,29 +1,86 @@
-<div style="text-align:center; margin-top: 10px;">
-  <h1>
-    Update Course
-  </h1>
- </div>
- <div style="margin:20px 50px 20px 50px;">
-<form #courseform="ngForm" (ngSubmit)="onEdit(courseform)">
-    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedCourse._id">
+<div style="text-align: center; margin-top: 10px">
+  <h1>Update Course</h1>
+</div>
+<div style="margin: 20px 50px 20px 50px">
+  <form #courseForm="ngForm" (ngSubmit)="onEdit(courseForm)">
+    <input
+      type="hidden"
+      name="_id"
+      #_id="ngModel"
+      ngModel
+      [(ngModel)]="selectedCourse._id"
+    />
     <div class="form-group">
       <label for="department">Department</label>
-        <select [(ngModel)]="selectedCourse.departmentDetails" name="departmentDetails" class="form-control"> 
-          <option [selected]="selectedCourse.departmentDetails == 'select'" [value]="select">SELECT Department</option> 
-          <option  *ngFor="let dep of departments"  [ngValue]="dep">{{dep.departmentName}}</option>
-        </select>
+      <select
+        required
+        [(ngModel)]="selectedCourse?.departmentDetails._id"
+        (ngModelChange)="onDepartmentChange(department.value)"
+        name="department"
+        #department="ngModel"
+        ngModel
+        class="form-control"
+      >
+        <option *ngFor="let dep of departments" [value]="dep._id">
+          {{ dep.departmentName }}
+        </option>
+      </select>
     </div>
-  <div class="form-group">
-    <label for="course">Course Code</label>
-    <input required type="text" name="courseCode" #qname="ngModel" ngModel [(ngModel)]="selectedCourse.courseCode" class="form-control" id="inputdefault" placeholder="Course Code">
-  </div>
-  <div class="form-group">
-    <label for="course">Course Name</label>
-    <input required type="text" name="courseTitle" #qname="ngModel" ngModel [(ngModel)]="selectedCourse.courseTitle" class="form-control" id="inputdefault" placeholder="Course Name">
-  </div>
-  <div class="form-group">
-    <input type="submit" class="form-control btn btn-success" id="inputdefault">
-  </div>
-</form>
+    <div class="form-group">
+      <label for="course">Course Code</label>
+      <input
+        required
+        type="text"
+        name="courseCode"
+        #courseCode="ngModel"
+        ngModel
+        [(ngModel)]="selectedCourse.courseCode"
+        [ngClass]="{
+          'is-invalid':
+            !courseCode?.valid && (courseCode?.dirty || courseCode?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Course Code"
+      />
+      <div
+        *ngIf="!courseCode?.valid && (courseCode?.dirty || courseCode?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Course code is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="course">Course Name</label>
+      <input
+        required
+        type="text"
+        name="courseName"
+        #courseName="ngModel"
+        ngModel
+        [(ngModel)]="selectedCourse.courseTitle"
+        [ngClass]="{
+          'is-invalid':
+            !courseName?.valid && (courseName?.dirty || courseName?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Course Name"
+      />
+      <div
+        *ngIf="!courseName?.valid && (courseName?.dirty || courseName?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Course name is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        [disabled]="!courseForm.valid"
+        type="submit"
+        class="form-control btn btn-success"
+        id="inputdefault"
+      />
+    </div>
+  </form>
 </div>
-

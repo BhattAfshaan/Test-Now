@@ -1,24 +1,58 @@
-<div class="viewcat" style="background-color: aquamarine; max-height: 300vh;">
+<div
+  *ngIf="courses?.length > 0"
+  class="viewcat"
+  style="background-color: aquamarine; max-height: 300vh"
+>
   <div class="container">
-    <h2 style="padding: 10px;">List of courses</h2>              
+    <h2 style="padding: 10px">List of courses</h2>
     <table class="table table-hover">
-  
-        <tr>
-          <th>Department</th>
-          <th>Course Code</th>
-          <th>Course Name</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      
-        <tr *ngFor="let course of courses;let i = index">
-          <td>{{course?.departmentDetails?.departmentName}}</td>
-          <td>{{course.courseCode}}</td>
-          <td>{{course.courseTitle}}</td>
-          <td><a routerLink="../EditCourse/{{course._id}}"><img src="assets/logo/edit.png" id="icon" height="50" width="50" alt="User Icon" /></a></td>
-          <td><a class="action-btn" (click)="deleteCourse(course._id)"><img src="assets/logo/delete.png" id="icon" height="50" width="50" alt="User Icon" /></a></td>
-        </tr>
-        <router-outlet></router-outlet>
+      <tr>
+        <th>Department</th>
+        <th>Course Code</th>
+        <th>Course Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+      <tr *ngFor="let course of courses; let i = index">
+        <td>{{ course?.departmentDetails?.departmentName }}</td>
+        <td>{{ course.courseCode }}</td>
+        <td>{{ course.courseTitle }}</td>
+        <td>
+          <a routerLink="../EditCourse/{{ course._id }}"
+            ><img
+              src="assets/logo/edit.png"
+              id="icon"
+              height="50"
+              width="50"
+              alt="User Icon"
+          /></a>
+        </td>
+        <td>
+          <a class="action-btn" (click)="deleteCourse(course._id)"
+            ><img
+              src="assets/logo/delete.png"
+              id="icon"
+              height="50"
+              width="50"
+              alt="User Icon"
+          /></a>
+        </td>
+      </tr>
+      <router-outlet></router-outlet>
     </table>
   </div>
-  </div>
+</div>
+
+<div *ngIf="!courses || courses.length == 0">
+  <h1
+    style="
+      text-align: center;
+      margin: 16px;
+      text-decoration: underline;
+      font-weight: 600;
+    "
+  >
+    No data found
+  </h1>
+</div>

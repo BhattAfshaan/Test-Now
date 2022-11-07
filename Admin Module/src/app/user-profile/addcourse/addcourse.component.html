@@ -2,7 +2,7 @@
   <h1>Add Course</h1>
 </div>
 <div style="margin: 20px 50px 20px 50px">
-  <form #courseform="ngForm" (ngSubmit)="onSubmit(courseform)">
+  <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
     <input
       type="hidden"
       name="_id"
@@ -15,16 +15,25 @@
       <select
         required
         [(ngModel)]="course.departmentDetails"
-        name="course.departmentDetails"
+        name="department"
+        #department="ngModel"
+        ngModel
+        [ngClass]="{
+          'is-invalid': courseForm?.submitted && department?.invalid
+        }"
         class="form-control"
       >
-        <option [selected]="course.departmentID == 'select'" [value]="select">
-          Select Department
-        </option>
+        <option [ngValue]="select" disabled>Select department</option>
         <option *ngFor="let dep of departments" [ngValue]="dep">
           {{ dep.departmentName }}
         </option>
       </select>
+      <div
+        *ngIf="courseForm?.submitted && department?.invalid"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Department is required</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="course">Course Code</label>
@@ -35,10 +44,20 @@
         #courseCode="ngModel"
         ngModel
         [(ngModel)]="course.courseCode"
+        [ngClass]="{
+          'is-invalid':
+            !courseCode?.valid && (courseCode?.dirty || courseCode?.touched)
+        }"
         class="form-control"
         id="inputdefault"
         placeholder="Course Code"
       />
+      <div
+        *ngIf="!courseCode?.valid && (courseCode?.dirty || courseCode?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Course code is required</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="course">Course Name</label>
@@ -49,13 +68,24 @@
         #courseName="ngModel"
         ngModel
         [(ngModel)]="course.courseTitle"
+        [ngClass]="{
+          'is-invalid':
+            !courseName?.valid && (courseName?.dirty || courseName?.touched)
+        }"
         class="form-control"
         id="inputdefault"
         placeholder="Course Name"
       />
+      <div
+        *ngIf="!courseName?.valid && (courseName?.dirty || courseName?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Course name is required</span>
+      </div>
     </div>
     <div class="form-group">
       <input
+        [disabled]="!courseForm.valid"
         type="submit"
         class="form-control btn btn-success"
         id="inputdefault"
