@@ -3,13 +3,6 @@
 </div>
 <div style="margin: 20px 50px 20px 50px">
   <form #subjectForm="ngForm" (ngSubmit)="onSubmit(subjectForm)">
-    <input
-      type="hidden"
-      name="_id"
-      #_id="ngModel"
-      ngModel
-      [(ngModel)]="subject._id"
-    />
     <div class="form-group">
       <label for="subject">Course</label>
       <select
@@ -19,17 +12,17 @@
         #course="ngModel"
         ngModel
         [ngClass]="{
-          'is-invalid': subjectForm?.submitted && course?.invalid
+          'is-invalid': !course?.valid && (course?.dirty || course?.touched)
         }"
         class="form-control"
       >
-        <option [ngValue]="select" disabled>Select course</option>
+        <option disabled selected value="undefined">Select course</option>
         <option *ngFor="let course of courses" [ngValue]="course">
           {{ course.courseTitle }}
         </option>
       </select>
       <div
-        *ngIf="subjectForm?.submitted && course?.invalid"
+        *ngIf="!course?.valid && (course?.dirty || course?.touched)"
         class="invalid-feedback"
       >
         <span style="color: crimson">Course is required</span>
@@ -45,17 +38,20 @@
         #subjectType="ngModel"
         ngModel
         [ngClass]="{
-          'is-invalid': subjectForm?.submitted && subjectType?.invalid
+          'is-invalid':
+            !subjectType?.valid && (subjectType?.dirty || subjectType?.touched)
         }"
         class="form-control"
       >
-        <option [ngValue]="select" disabled>Select type</option>
-        <option [ngValue]="'Core'">Core</option>
-        <option [ngValue]="'DCE'">DCE</option>
-        <option [ngValue]="'Open Elective'">Open Elective</option>
+        <option disabled selected value="undefined">Select type</option>
+        <option value="Core">Core</option>
+        <option value="DCE">DCE</option>
+        <option value="Open Elective">Open Elective</option>
       </select>
       <div
-        *ngIf="subjectForm?.submitted && subjectType?.invalid"
+        *ngIf="
+          !subjectType?.valid && (subjectType?.dirty || subjectType?.touched)
+        "
         class="invalid-feedback"
       >
         <span style="color: crimson">Type is required</span>

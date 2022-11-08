@@ -3,13 +3,6 @@
 </div>
 <div style="margin: 20px 50px 20px 50px">
   <form #subjectForm="ngForm" (ngSubmit)="onEdit(subjectForm)">
-    <input
-      type="hidden"
-      name="_id"
-      #_id="ngModel"
-      ngModel
-      [(ngModel)]="selectedSubject._id"
-    />
     <div class="form-group">
       <label for="subject">Course</label>
       <select
@@ -21,7 +14,7 @@
         ngModel
         class="form-control"
       >
-        <option *ngFor="let course of courses" [ngValue]="course._id">
+        <option *ngFor="let course of courses" [value]="course._id">
           {{ course.courseTitle }}
         </option>
       </select>
@@ -36,9 +29,9 @@
         ngModel
         class="form-control"
       >
-        <option [ngValue]="'Core'">Core</option>
-        <option [ngValue]="'DCE'">DCE</option>
-        <option [ngValue]="'Open Elective'">Open Elective</option>
+        <option value="Core">Core</option>
+        <option value="DCE">DCE</option>
+        <option value="Open Elective">Open Elective</option>
       </select>
     </div>
 
