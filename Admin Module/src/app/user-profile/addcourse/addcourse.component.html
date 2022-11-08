@@ -3,13 +3,6 @@
 </div>
 <div style="margin: 20px 50px 20px 50px">
   <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
-    <input
-      type="hidden"
-      name="_id"
-      #_id="ngModel"
-      ngModel
-      [(ngModel)]="course._id"
-    />
     <div class="form-group">
       <label for="department">Department</label>
       <select
@@ -19,17 +12,18 @@
         #department="ngModel"
         ngModel
         [ngClass]="{
-          'is-invalid': courseForm?.submitted && department?.invalid
+          'is-invalid':
+            !department?.valid && (department?.dirty || department?.touched)
         }"
         class="form-control"
       >
-        <option [ngValue]="select" disabled>Select department</option>
+        <option disabled selected value="undefined">Select department</option>
         <option *ngFor="let dep of departments" [ngValue]="dep">
           {{ dep.departmentName }}
         </option>
       </select>
       <div
-        *ngIf="courseForm?.submitted && department?.invalid"
+        *ngIf="!department?.valid && (department?.dirty || department?.touched)"
         class="invalid-feedback"
       >
         <span style="color: crimson">Department is required</span>
