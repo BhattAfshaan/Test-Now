@@ -1,30 +1,55 @@
-<div class="viewcat" style="background-color: aquamarine; max-height: 300vh;">
+<div class="viewcat" style="background-color: aquamarine; max-height: 300vh">
   <div class="container">
-    <h2 style="padding: 12px;">List of subjects</h2>            
+    <h2 style="padding: 12px">List of subjects</h2>
+    <div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        [(ngModel)]="searchText"
+      />
+    </div>
     <table class="table table-hover">
-  
-        <tr>
-          <th>Course Name</th>
-          <th>Type</th>
-          <th>Subject Code</th>
-          <th>Subject Name</th>
-          <th>Semester</th>
-          <th>Credits</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      
-        <tr *ngFor="let subject of subjects;let i = index">
-          <td>{{subject?.courseDetails?.courseTitle}}</td>
-          <td>{{subject?.Type}}</td>
-          <td>{{subject?.subjectCode}}</td>
-          <td>{{subject?.subjectName}}</td>
-          <td>{{subject?.Semester}}</td>
-          <td>{{subject?.Credits}}</td>
-          <td><a routerLink="../EditSubject/{{subject._id}}"><img src="assets/logo/edit.png" id="icon" height="50" width="50" alt="User Icon" /></a></td>
-          <td><a class="action-btn" (click)="deleteSubject(subject._id)"><img src="assets/logo/delete.png" id="icon" height="50" width="50" alt="User Icon" /></a></td>
-        </tr>
-        <router-outlet></router-outlet>
+      <tr>
+        <th>Course Name</th>
+        <th>Type</th>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Semester</th>
+        <th>Credits</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+      <tr *ngFor="let subject of subjects | filter: searchText">
+        <td>{{ subject?.courseDetails?.courseTitle }}</td>
+        <td>{{ subject?.Type }}</td>
+        <td>{{ subject?.subjectCode }}</td>
+        <td>{{ subject?.subjectName }}</td>
+        <td>{{ subject?.Semester }}</td>
+        <td>{{ subject?.Credits }}</td>
+        <td>
+          <a routerLink="../EditSubject/{{ subject._id }}"
+            ><img
+              src="assets/logo/edit.png"
+              id="icon"
+              height="50"
+              width="50"
+              alt="User Icon"
+          /></a>
+        </td>
+        <td>
+          <a class="action-btn" (click)="deleteSubject(subject._id)"
+            ><img
+              src="assets/logo/delete.png"
+              id="icon"
+              height="50"
+              width="50"
+              alt="User Icon"
+          /></a>
+        </td>
+      </tr>
+      <router-outlet></router-outlet>
     </table>
   </div>
-  </div>
+</div>

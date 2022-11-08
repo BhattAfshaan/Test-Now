@@ -11,6 +11,7 @@ import { Question } from "../../shared/question1.model";
 })
 export class ViewquestionComponent implements OnInit {
   public questions: Question[] = [];
+  searchText: any;
   constructor(
     private router: Router,
     private qservice: QuestionService,

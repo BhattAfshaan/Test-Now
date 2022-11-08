@@ -10,6 +10,7 @@ import { AlertService } from "../../shared/alertService";
 })
 export class ViewsubjectComponent implements OnInit {
   subjects: Subject[] = [];
+  searchText: any;
   constructor(
     private subjectService: SubjectService,
     private alertService: AlertService

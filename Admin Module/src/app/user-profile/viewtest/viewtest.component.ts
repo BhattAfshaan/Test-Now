@@ -10,6 +10,7 @@ import { AlertService } from "../../shared/alertService";
 })
 export class ViewtestComponent implements OnInit {
   tests: Test[] = [];
+  searchText: any;
   constructor(
     private testService: TestService,
     private alertService: AlertService

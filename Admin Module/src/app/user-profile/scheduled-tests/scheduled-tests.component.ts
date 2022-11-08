@@ -12,6 +12,7 @@ import { TestService } from "../../shared/testService";
 })
 export class ScheduledTestsComponent implements OnInit {
   tests: Test[] = [];
+  searchText: any;
   constructor(
     private testService: TestService,
     private router: Router,

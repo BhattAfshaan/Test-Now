@@ -5,14 +5,14 @@
 >
   <div class="container">
     <h2 style="padding: 10px">List of departments</h2>
-    <!-- <div>
+    <div>
       <input
         type="text"
         class="form-control"
         placeholder="Search..."
-        [(ngModel)]="filterTerm"
+        [(ngModel)]="searchText"
       />
-    </div> -->
+    </div>
     <table class="table table-striped table-bordered table-hover">
       <tr>
         <th>Department Code</th>
@@ -21,7 +21,7 @@
         <th>Delete</th>
       </tr>
 
-      <tr *ngFor="let department of departments">
+      <tr *ngFor="let department of departments | filter: searchText">
         <td>{{ department.departmentCode }}</td>
         <td>{{ department.departmentName }}</td>
         <td>

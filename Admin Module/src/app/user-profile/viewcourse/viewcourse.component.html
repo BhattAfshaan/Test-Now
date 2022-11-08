@@ -5,6 +5,14 @@
 >
   <div class="container">
     <h2 style="padding: 10px">List of courses</h2>
+    <div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        [(ngModel)]="searchText"
+      />
+    </div>
     <table class="table table-hover">
       <tr>
         <th>Department</th>
@@ -14,7 +22,7 @@
         <th>Delete</th>
       </tr>
 
-      <tr *ngFor="let course of courses; let i = index">
+      <tr *ngFor="let course of courses | filter: searchText">
         <td>{{ course?.departmentDetails?.departmentName }}</td>
         <td>{{ course.courseCode }}</td>
         <td>{{ course.courseTitle }}</td>

@@ -14,6 +14,7 @@ import { DepartmentService } from "../../shared/departmentService";
 })
 export class ViewDepartmentComponent implements OnInit {
   departments: Department[] = [];
+  searchText: any;
   constructor(
     private departmentService: DepartmentService,
     private alertService: AlertService,
