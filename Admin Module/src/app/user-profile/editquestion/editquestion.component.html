@@ -1,65 +1,293 @@
-
-<div style="text-align:center; margin-top: 10px;">
-  <h1>
-    Update Question
-  </h1>
+<div style="text-align: center; margin-top: 10px">
+  <h1>Update Question</h1>
 </div>
- <div style="margin:20px 50px 20px 50px;">
-<form #questionform="ngForm" (ngSubmit)="onEdit(questionform)">
-    <input type="hidden" name="_id" #_id="ngModel" ngModel [(ngModel)]="selectedquestion._id">
-  <div class="form-group">
-    <label for="question">Subject</label>
-      <select [(ngModel)]="selectedquestion.subjectDetails" name="subjectDetails" class="form-control"> 
-        <option [selected]="selectedquestion.subjectDetails == 'select'" [value]="select">SELECT Subject</option>  
-        <option  *ngFor="let subject of subjects" [ngValue]="subject">{{subject.subjectName}}</option>
+<div style="margin: 20px 50px 20px 50px">
+  <form #questionForm="ngForm" (ngSubmit)="onEdit(questionForm)">
+    <div class="form-group">
+      <label for="question">Subject</label>
+      <select
+        class="form-control"
+        required
+        [(ngModel)]="selectedQuestion.subjectDetails._id"
+        (ngModelChange)="onSubjectChange(subjectDetails.value)"
+        name="subjectDetails"
+        #subjectDetails="ngModel"
+        ngModel
+        [ngClass]="{
+          'is-invalid':
+            !subjectDetails?.valid &&
+            (subjectDetails?.dirty || subjectDetails?.touched)
+        }"
+        class="form-control"
+      >
+        <option *ngFor="let subject of subjects" [value]="subject._id">
+          {{ subject.subjectName }}
+        </option>
       </select>
-  </div>
-  <div class="form-group">
-    <label for="question">Unit Name</label>
-    <input type="text" name="unitName" #unitName="ngModel" ngModel [(ngModel)]="selectedquestion.unitName" class="form-control" id="inputdefault" placeholder="Unit Name">
-  </div>
-  <div class="form-group">
-    <label for="question">Topic Name</label>
-    <input type="text" name="topicName" #topicName="ngModel" ngModel [(ngModel)]="selectedquestion.topicName" class="form-control" id="inputdefault" placeholder="Topic Name">
-  </div>
-  <div class="form-group">
-    <label for="question">Marks</label>
-    <input type="text" name="marks" #marks="ngModel" ngModel [(ngModel)]="selectedquestion.marks" class="form-control" id="inputdefault" placeholder="Marks">
-  </div>
-<div class="form-group">
-  <label for="question">Question Code</label>
-  <input type="text" name="questionCode" #questionCode="ngModel" ngModel [(ngModel)]="selectedquestion.questionCode" class="form-control" id="inputdefault" placeholder="Question Code">
-</div>
-<div class="form-group">
-  <label for="question">Question Description</label>
-  <input type="text" name="questionDescription" #questionDescription="ngModel" ngModel [(ngModel)]="selectedquestion.questionDescription" class="form-control" id="inputdefault" placeholder="Question Description">
-</div>
-<div class="form-group">
-  <label for="question">Option One</label>
-  <input type="text" name="optionOne" #optionOne="ngModel" ngModel [(ngModel)]="selectedquestion.optionOne" class="form-control" id="inputdefault" placeholder="Option">
-</div>
+    </div>
+    <div class="form-group">
+      <label for="question">Unit Name</label>
+      <input
+        required
+        type="text"
+        name="unitName"
+        #unitName="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.unitName"
+        [ngClass]="{
+          'is-invalid':
+            !unitName?.valid && (unitName?.dirty || unitName?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Unit Name"
+      />
+      <div
+        *ngIf="!unitName?.valid && (unitName?.dirty || unitName?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Unit name is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Topic Name</label>
+      <input
+        required
+        type="text"
+        name="topicName"
+        #topicName="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.topicName"
+        [ngClass]="{
+          'is-invalid':
+            !topicName?.valid && (topicName?.dirty || topicName?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Topic Name"
+      />
+      <div
+        *ngIf="!topicName?.valid && (topicName?.dirty || topicName?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Topic name is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Marks</label>
+      <input
+        required
+        type="text"
+        name="marks"
+        #marks="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.marks"
+        [ngClass]="{
+          'is-invalid': !marks?.valid && (marks?.dirty || marks?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Marks"
+      />
+      <div
+        *ngIf="!marks?.valid && (marks?.dirty || marks?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Marks is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Question Code</label>
+      <input
+        required
+        type="text"
+        name="questionCode"
+        #questionCode="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.questionCode"
+        [ngClass]="{
+          'is-invalid':
+            !questionCode?.valid &&
+            (questionCode?.dirty || questionCode?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Question Code"
+      />
+      <div
+        *ngIf="
+          !questionCode?.valid && (questionCode?.dirty || questionCode?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Question code is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Question Description</label>
+      <input
+        required
+        type="text"
+        name="questionDescription"
+        #questionDescription="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.questionDescription"
+        [ngClass]="{
+          'is-invalid':
+            !questionDescription?.valid &&
+            (questionDescription?.dirty || questionDescription?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Question Description"
+      />
+      <div
+        *ngIf="
+          !questionDescription?.valid &&
+          (questionDescription?.dirty || questionDescription?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Question description is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Option One</label>
+      <input
+        required
+        type="text"
+        name="optionOne"
+        #optionOne="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.optionOne"
+        [ngClass]="{
+          'is-invalid':
+            !optionOne?.valid && (optionOne?.dirty || optionOne?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Option"
+      />
+      <div
+        *ngIf="!optionOne?.valid && (optionOne?.dirty || optionOne?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Option one is required</span>
+      </div>
+    </div>
 
-<div class="form-group">
-  <label for="question">Option Two</label>
-  <input type="text" name="optionTwo" #optionTwo="ngModel" ngModel [(ngModel)]="selectedquestion.optionTwo" class="form-control" id="inputdefault" placeholder="Option">
-</div>
+    <div class="form-group">
+      <label for="question">Option Two</label>
+      <input
+        required
+        type="text"
+        name="optionTwo"
+        #optionTwo="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.optionTwo"
+        [ngClass]="{
+          'is-invalid':
+            !optionTwo?.valid && (optionTwo?.dirty || optionTwo?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Option"
+      />
+      <div
+        *ngIf="!optionTwo?.valid && (optionTwo?.dirty || optionTwo?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Option two is required</span>
+      </div>
+    </div>
 
-<div class="form-group">
-  <label for="question">Option Three</label>
-  <input type="text" name="optionThree" #optionThree="ngModel" ngModel [(ngModel)]="selectedquestion.optionThree" class="form-control" id="inputdefault" placeholder="Option">
-</div>
+    <div class="form-group">
+      <label for="question">Option Three</label>
+      <input
+        required
+        type="text"
+        name="optionThree"
+        #optionThree="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.optionThree"
+        [ngClass]="{
+          'is-invalid':
+            !optionThree?.valid && (optionThree?.dirty || optionThree?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Option"
+      />
+      <div
+        *ngIf="
+          !optionThree?.valid && (optionThree?.dirty || optionThree?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Option three is required</span>
+      </div>
+    </div>
 
-<div class="form-group">
-  <label for="question">Option Four</label>
-  <input type="text" name="optionFour" #optionFour="ngModel" ngModel [(ngModel)]="selectedquestion.optionFour" class="form-control" id="inputdefault" placeholder="Option">
-</div>
-<div class="form-group">
-  <label for="question">Correct Answer</label>
-  <input type="text" name="correctAnswer" #correctAnswer="ngModel" ngModel [(ngModel)]="selectedquestion.correctAnswer" class="form-control" id="inputdefault" placeholder="Correct Answer">
-</div>
+    <div class="form-group">
+      <label for="question">Option Four</label>
+      <input
+        required
+        type="text"
+        name="optionFour"
+        #optionFour="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.optionFour"
+        [ngClass]="{
+          'is-invalid':
+            !optionFour?.valid && (optionFour?.dirty || optionFour?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Option"
+      />
+      <div
+        *ngIf="!optionFour?.valid && (optionFour?.dirty || optionFour?.touched)"
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Option four is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="question">Correct Answer</label>
+      <input
+        required
+        type="text"
+        name="correctAnswer"
+        #correctAnswer="ngModel"
+        ngModel
+        [(ngModel)]="selectedQuestion.correctAnswer"
+        [ngClass]="{
+          'is-invalid':
+            !correctAnswer?.valid &&
+            (correctAnswer?.dirty || correctAnswer?.touched)
+        }"
+        class="form-control"
+        id="inputdefault"
+        placeholder="Correct Answer"
+      />
+      <div
+        *ngIf="
+          !correctAnswer?.valid &&
+          (correctAnswer?.dirty || correctAnswer?.touched)
+        "
+        class="invalid-feedback"
+      >
+        <span style="color: crimson">Correct answer is required</span>
+      </div>
+    </div>
 
-<div class="form-group">
-  <input type="submit" class="form-control btn btn-success" id="inputdefault">
-</div>
-</form>
+    <div class="form-group">
+      <input
+        [disabled]="!questionForm.valid"
+        type="submit"
+        class="form-control btn btn-success"
+        id="inputdefault"
+      />
+    </div>
+  </form>
 </div>
