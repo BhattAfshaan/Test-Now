@@ -58,22 +58,20 @@ import {
 
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 
-// const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-//   bgsColor: 'rgba(12,80,219,0.98)',
-//   bgsOpacity: 1,
-//   bgsPosition: POSITION.bottomRight,
-//   bgsSize: 40,
-//   bgsType: SPINNER.threeStrings,
-//   fgsColor: 'rgba(12,80,219,0.98)',
-//   fgsPosition: POSITION.centerCenter
-//   };
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  bgsColor: "red",
-  bgsPosition: POSITION.bottomCenter,
-  bgsSize: 40,
-  bgsType: SPINNER.circle,
-  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
-  pbThickness: 2, // progress bar thickness
+  blur: 0,
+  fgsColor: "#6495ed",
+  fgsPosition: "center-center",
+  fgsSize: 80,
+  fgsType: "three-strings",
+  overlayColor: "rgba(40, 40, 40, 0.8)",
+  pbColor: "#6495ed",
+  pbDirection: "ltr",
+  pbThickness: 2,
+  hasProgressBar: true,
+  text: "Loading...",
+  textColor: "#FFFFFF",
+  textPosition: "center-center",
 };
 
 @NgModule({
