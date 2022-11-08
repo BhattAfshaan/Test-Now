@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import { Test } from '../shared/testModel';
+import { Test } from "../shared/testModel";
+import { CustomDateService } from "./CustomDateService";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TestService {
-  constructor(private http: HttpClient) { }
-  readonly baseURL = 'http://localhost:3000/test';
+  constructor(
+    private http: HttpClient,
+    private customDateService: CustomDateService
+  ) {}
+  readonly baseURL = "http://localhost:3000/test";
   getTests() {
-    return this.http.get(this.baseURL) ;
+    return this.http.get(this.baseURL);
   }
-  insertTest( test: Test) {
+  insertTest(test: Test) {
     return this.http.post(this.baseURL, test);
   }
   getTestByID(_id: string) {
@@ -24,6 +28,4 @@ export class TestService {
   deleteTestByID(_id: string) {
     return this.http.delete(this.baseURL + `/${_id}`);
   }
-  
-
 }

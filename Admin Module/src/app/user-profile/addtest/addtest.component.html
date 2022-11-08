@@ -1,66 +1,221 @@
+<div style="text-align: center; margin-top: 10px">
+  <h1>Add Test</h1>
+</div>
+<div style="margin: 20px 50px 20px 50px">
+  <form #selectionform="ngForm" (ngSubmit)="onSubmit(selectionform)">
+    <div *ngIf="showSelection">
+      <div class="form-group">
+        <label for="selection">Department</label>
+        <select
+          required
+          (change)="onDepartmentChange($event)"
+          name="department"
+          #department="ngModel"
+          ngModel
+          [(ngModel)]="selectedDepartmentID"
+          [ngClass]="{
+            'is-invalid': !department?.valid && isSubmitted
+          }"
+          class="form-control"
+          id="inputdefault"
+        >
+          <option disabled selected value="undefined">Select department</option>
+          <option *ngFor="let dep of departments" [value]="dep._id">
+            {{ dep.departmentName }}
+          </option>
+        </select>
+        <div *ngIf="!department?.valid && isSubmitted" class="invalid-feedback">
+          <span style="color: crimson">Department is required</span>
+        </div>
+      </div>
+      <div *ngIf="showCourses" class="form-group">
+        <label for="selection">Course</label>
+        <select
+          required
+          (change)="onCourseChange($event)"
+          name="course"
+          #course="ngModel"
+          ngModel
+          [(ngModel)]="selectedCourseID"
+          [ngClass]="{
+            'is-invalid': !course?.valid && isSubmitted
+          }"
+          class="form-control"
+        >
+          <option disabled selected value="undefined">Select course</option>
+          <option *ngFor="let course of courses" [value]="course._id">
+            {{ course.courseTitle }}
+          </option>
+        </select>
+        <div *ngIf="!course?.valid && isSubmitted" class="invalid-feedback">
+          <span style="color: crimson">Course is required</span>
+        </div>
+      </div>
+      <div *ngIf="showSubjects" class="form-group">
+        <label for="selection">Subject</label>
+        <select
+          required
+          name="subject"
+          #subject="ngModel"
+          ngModel
+          [(ngModel)]="selectedSubjectID"
+          [ngClass]="{
+            'is-invalid': !subject?.valid && isSubmitted
+          }"
+          class="form-control"
+        >
+          <option disabled selected value="undefined">Select subject</option>
+          <option *ngFor="let subject of subjects" [value]="subject._id">
+            {{ subject.subjectName }}
+          </option>
+        </select>
+        <div *ngIf="!subject?.valid && isSubmitted" class="invalid-feedback">
+          <span style="color: crimson">Subject is required</span>
+        </div>
+      </div>
 
-<div style="text-align:center; margin-top: 10px;">
-  <h1>
-    Add Test
-  </h1>
- </div>
- <div style="margin:20px 50px 20px 50px;">
-<form #selectionform="ngForm" (ngSubmit)="onSubmit(selectionform)">
-  <div *ngIf="showSelection">
-    <div class="form-group">
-      <label for="selection">Department</label>
-        <select (change)="onDepartmentChange($event)" [(ngModel)]="selectedDepartmentID" name="selectedDepartmentID" class="form-control"> 
-          <option [selected]="selectedDepartmentID == 'select'" [value]="select">SELECT Department</option>  
-          <option  *ngFor="let dep of departments"  [value]="dep._id">{{dep.departmentName}}</option>
-        </select>
+      <div class="form-group">
+        <input
+          type="submit"
+          class="form-control btn btn-success"
+          id="inputdefault"
+        />
+      </div>
     </div>
-    <div *ngIf="showCourses" class="form-group">
-      <label for="selection">Course</label>
-        <select (change)="onCourseChange($event)" [(ngModel)]="selectedCourseID" name="selectedCourseID" class="form-control"> 
-          <option [selected]="selectedCourseID == 'select'" [value]="select">SELECT Course</option>  
-          <option  *ngFor="let course of courses"  [value]="course._id">{{course.courseTitle}}</option>
-        </select>
-    </div>
-    <div *ngIf="showSubjects" class="form-group">
-      <label for="selection">Subject</label>
-        <select [(ngModel)]="selectedSubjectID" name="selectedSubjectID" class="form-control"> 
-          <option [selected]="selectedSubjectID == 'select'" [value]="select">SELECT Subject</option>  
-          <option  *ngFor="let subject of subjects"  [value]="subject._id">{{subject.subjectName}}</option>
-        </select>
-    </div>
-    
-   <div class="form-group">
-      <input type="submit" class="form-control btn btn-success" id="inputdefault">
-    </div>
-  </div>
-</form>
+  </form>
   <div *ngIf="showExamDetails">
-    <form #examDetailsForm="ngForm" (ngSubmit)="onDetailsSubmit(examDetailsForm)">
+    <form
+      #examDetailsForm="ngForm"
+      (ngSubmit)="onDetailsSubmit(examDetailsForm)"
+    >
       <div class="form-group">
         <label for="question">Test Code</label>
-        <input type="text" name="testCode" #testCode="ngModel" ngModel [(ngModel)]="test.testCode" class="form-control" id="inputdefault" placeholder="Test Code">
+        <input
+          required
+          type="text"
+          name="testCode"
+          #testCode="ngModel"
+          ngModel
+          [(ngModel)]="test.testCode"
+          [ngClass]="{
+            'is-invalid':
+              !testCode?.valid && (testCode?.dirty || testCode?.touched)
+          }"
+          class="form-control"
+          id="inputdefault"
+          placeholder="Test Code"
+        />
+        <div
+          *ngIf="!testCode?.valid && (testCode?.dirty || testCode?.touched)"
+          class="invalid-feedback"
+        >
+          <span style="color: crimson">Test code is required</span>
+        </div>
       </div>
       <div class="form-group">
         <label for="question">Test Name</label>
-        <input type="text" name="testName" #testName="ngModel" ngModel [(ngModel)]="test.testName" class="form-control" id="inputdefault" placeholder="Test Name">
+        <input
+          required
+          type="text"
+          name="testName"
+          #testName="ngModel"
+          ngModel
+          [(ngModel)]="test.testName"
+          [ngClass]="{
+            'is-invalid':
+              !testName?.valid && (testName?.dirty || testName?.touched)
+          }"
+          class="form-control"
+          id="inputdefault"
+          placeholder="Test Name"
+        />
+        <div
+          *ngIf="!testName?.valid && (testName?.dirty || testName?.touched)"
+          class="invalid-feedback"
+        >
+          <span style="color: crimson">Test name is required</span>
+        </div>
       </div>
       <div class="form-group">
         <label for="selection">Test Date</label>
-        <input (click)="d.toggle()" class="form-control" placeholder="dd-mm-yyyy"  
-        name="examDate" [(ngModel)]="test.testDate" ngbDatepicker #d="ngbDatepicker">  
+        <input
+          required
+          (click)="d.toggle()"
+          class="form-control"
+          placeholder="dd-mm-yyyy"
+          name="examDate"
+          #examDate="ngModel"
+          [(ngModel)]="test.testDate"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          [ngClass]="{
+            'is-invalid':
+              examDate?.invalid && (examDate.dirty || examDate.touched)
+          }"
+        />
+        <div
+          *ngIf="examDate?.invalid && (examDate?.dirty || examDate?.touched)"
+          class="invalid-feedback"
+        >
+          <span style="color: crimson">Test date is required</span>
+        </div>
       </div>
       <div class="form-group">
         <label for="selection">Start Time</label>
-        <input atp-time-picker type="time" [value]="viewStartTime" (focusin)="open('startTime')" class="form-control"/>
+        <input
+          required
+          atp-time-picker
+          name="startTime"
+          #startTime="ngModel"
+          ngModel
+          [(ngModel)]="viewStartTime"
+          type="time"
+          [value]="viewStartTime"
+          (focusin)="open('startTime')"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              startTime?.invalid && (startTime.dirty || startTime.touched)
+          }"
+        />
+        <div
+          *ngIf="startTime?.invalid && (startTime?.dirty || startTime?.touched)"
+          class="invalid-feedback"
+        >
+          <span style="color: crimson">Start time is required</span>
+        </div>
       </div>
       <div class="form-group">
         <label for="selection">End Time</label>
-        <input atp-time-picker type="time" [value]="viewEndTime" (focusin)="open('endTime')" class="form-control"/>
+        <input
+          required
+          atp-time-picker
+          name="endTime"
+          #endTime="ngModel"
+          ngModel
+          [(ngModel)]="viewEndTime"
+          type="time"
+          [value]="viewEndTime"
+          (focusin)="open('endTime')"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': endTime?.invalid && (endTime.dirty || endTime.touched)
+          }"
+        />
+        <div
+          *ngIf="endTime?.invalid && (endTime?.dirty || endTime?.touched)"
+          class="invalid-feedback"
+        >
+          <span style="color: crimson">End time is required</span>
+        </div>
       </div>
       <div class="form-group">
-        <input type="submit" class="form-control btn btn-success" id="inputdefault">
+        <input
+          type="submit"
+          class="form-control btn btn-success"
+          id="inputdefault"
+        />
       </div>
-    </form>  
+    </form>
   </div>
 </div>
-
