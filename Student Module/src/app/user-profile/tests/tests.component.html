@@ -1,37 +1,123 @@
-
-<div class="container" style="margin:20px;float: left;">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="card border-success">
-          <div class="card-header">Question</div>
-          <div class="card-body">
+<div class="container-fluid">
+  <div
+    style="
+      border: 2px solid cornflowerblue;
+      margin: 20px;
+      padding: 16px;
+      border-radius: 12px;
+    "
+  >
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Subject</th>
+            <th scope="col">Test Code</th>
+            <th scope="col">Test Name</th>
+            <th scope="col">Total No. Of Questions</th>
+            <th scope="col">Min Marks</th>
+            <th scope="col">Max Marks</th>
+            <th scope="col">Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ selectedTest?.subjectName }}</th>
+            <th>{{ selectedTest.testCode }}</th>
+            <th>{{ selectedTest.testName }}</th>
+            <th>{{ selectedTest.testQuestions.length }}</th>
+            <td>{{ minMarks }}</td>
+            <td>{{ maxMarks }}</td>
+            <td>{{ selectedTest.testQuestions.length }} Minutes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border-success">
+            <div class="card-header">Question</div>
+            <div class="card-body">
               <div>
-                  <form #questionform="ngForm" (ngSubmit)="onAnswer(questionform)">
-                    <input type="hidden" name="qid"  [(ngModel)]="questions[0]._id">
-              
-                    <table style="width:100%;background-color: azure;">
-                      <tr>
-                        <td>{{questions[0].questionDescription}}</td>
-                      </tr>
-                      <tr>
-                        <td><input type="radio" name="uanswer" value="{{questions[0].optionOne}}" [(ngModel)]="uanswer" > {{questions[0].optionOne}}</td>
-                        <td><input type="radio" name="uanswer" value="{{questions[0].optionTwo}}" [(ngModel)]="uanswer"> {{questions[0].optionTwo}}</td>
-                      </tr>
-                      <tr>
-                        <td><input type="radio" name="uanswer" value="{{questions[0].optionThree}}" [(ngModel)]="uanswer"> {{questions[0].optionThree}}</td>
-                        <td><input type="radio" name="uanswer" value="{{questions[0].optionFour}}" [(ngModel)]="uanswer"> {{questions[0].optionFour}}</td>
-                        <input type="hidden" name="canswer"  [(ngModel)]="questions[0].correctAnswer">
-                        <input type="hidden" name="marks"  [(ngModel)]="questions[0].marks"> 
-                        <input type="hidden" name="category_id"  [(ngModel)]="questions[0].subjectDetails._id"> 
-                      </tr>
-                      <tr style="text-align: center;">
-                        <td colspan="2"><input type="submit" value="submit"></td>
-                      </tr>
-                    </table>
-                    </form>
-                  </div>
+                <form
+                  #questionForm="ngForm"
+                  (ngSubmit)="onSubmit(questionForm)"
+                >
+                  <table
+                    *ngFor="let question of questions"
+                    style="width: 100%; background-color: azure"
+                  >
+                    <tr>
+                      <td>{{ question.questionDescription }}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="radio"
+                          name="uanswer"
+                          value="{{ question.optionOne }}"
+                          [(ngModel)]="uanswer"
+                        />{{ question.optionOne }}
+                      </td>
+                      <td>
+                        <input
+                          type="radio"
+                          name="uanswer"
+                          value="{{ question.optionTwo }}"
+                          [(ngModel)]="uanswer"
+                        />{{ question.optionTwo }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="radio"
+                          name="uanswer"
+                          value="{{ question.optionThree }}"
+                          [(ngModel)]="uanswer"
+                        />{{ question.optionThree }}
+                      </td>
+                      <td>
+                        <input
+                          type="radio"
+                          name="uanswer"
+                          value="{{ question.optionFour }}"
+                          [(ngModel)]="uanswer"
+                        />{{ question.optionFour }}
+                      </td>
+                      <input
+                        type="hidden"
+                        name="canswer"
+                        [(ngModel)]="question.correctAnswer"
+                      />
+                      <input
+                        type="hidden"
+                        name="marks"
+                        [(ngModel)]="question.marks"
+                      />
+                      <input
+                        type="hidden"
+                        name="questionID"
+                        [(ngModel)]="question._id"
+                      />
+                    </tr>
+                    <tr style="text-align: center">
+                      <td colspan="3">
+                        <input
+                          [disabled]="isSubmitted"
+                          type="submit"
+                          value="submit"
+                          class="btn btn-dark"
+                        />
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
     </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

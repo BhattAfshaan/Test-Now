@@ -1,54 +1,24 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center ">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Test Now</a>
-  
-    <!-- Links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="cat">Tests</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="result">Result</a>
-      </li>
-      <li *ngIf="userDetails" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color:aquamarine">
-          Welcome Student : {{userDetails.fullName}}
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" (click)="onLogout()">Log Out</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-  <div >
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Test Code</th>
-          <th scope="col">Test Name</th>
-          <th scope="col">Test Date</th>
-          <th scope="col">Start Time</th>
-          <th scope="col">End Time</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let test of tests">
-          <th scope="row">{{test.testCode}}</th>
-          <td>{{test.testName}}</td>
-          <td>{{test.testDate}}</td>
-          <td>{{test.testStartTime}}</td>
-          <td>{{test.testEndTime}}</td>
-          <td>
-            <button (click)="goToQuestions()" type="button" class="btn btn-light">Take Exam</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+  <div (click)="viewScheduledTests()">
+    <a class="navbar-brand" style="color: #fff; cursor: pointer">Test Now</a>
   </div>
-  
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li *ngIf="userDetails" class="nav-item dropdown">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="navbardrop"
+        data-toggle="dropdown"
+        style="color: aquamarine"
+      >
+        Welcome User : {{ userDetails.fullName }}
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="onLogout()">Log Out</a>
+      </div>
+    </li>
+  </ul>
+</nav>
 <router-outlet></router-outlet>
-
-
-
-

@@ -1,0 +1,45 @@
+<h3 style="margin: 14px">List of tests</h3>
+<div style="margin: 14px">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Department</th>
+        <th scope="col">Course</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Test Code</th>
+        <th scope="col">Test Name</th>
+        <th scope="col">Test Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Action</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let test of tests">
+        <th scope="row">{{ test.departmentName }}</th>
+        <td>{{ test.courseName }}</td>
+        <td>{{ test.subjectName }}</td>
+        <td>{{ test.testCode }}</td>
+        <td>{{ test.testName }}</td>
+        <td>{{ test.testDate }}</td>
+        <td>{{ test.testStartTime }}</td>
+        <td>{{ test.testEndTime }}</td>
+        <td>
+          <button
+            (click)="goToQuestions(test)"
+            type="button"
+            class="btn btn-dark"
+          >
+            Take Test
+          </button>
+        </td>
+        <td>
+          <button (click)="goToResult(test)" type="button" class="btn btn-dark">
+            View Result
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
