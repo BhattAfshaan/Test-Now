@@ -2,9 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Department } from "../../shared/departmentModel";
 import { DepartmentService } from "../../shared/departmentService";
-import { Category } from "../../shared/category.model";
-import { CategoryService } from "../../shared/category.service";
-
 import { UserService } from "../../shared/user.service";
 import { Course } from "../../shared/courseModel";
 import { CourseService } from "../../shared/courseService";
@@ -19,7 +16,6 @@ export class SignUpComponent implements OnInit {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   showSucessMessage: boolean;
   serverErrorMessages: string;
-  categories: Category[] = [];
   departments: Department[] = [];
   courses: Course[] = [];
 
@@ -47,7 +43,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.userService.postUser(form.value).subscribe(
       (res) => {
         this.showSucessMessage = true;

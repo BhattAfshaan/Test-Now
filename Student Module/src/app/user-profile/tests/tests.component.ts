@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Result } from "../../shared/result.model";
 import { UserDetails } from "../../shared/user.model";
@@ -6,6 +6,7 @@ import { NgForm } from "@angular/forms";
 import { ResultService } from "../../shared/result.service";
 import { UserService } from "../../shared/user.service";
 import { AlertService } from "src/app/shared/alertService";
+import { LocationStrategy } from "@angular/common";
 
 @Component({
   selector: "app-tests",
@@ -19,18 +20,32 @@ export class TestsComponent implements OnInit {
   questions: any[] = [];
   maxMarks: number = 0;
   minMarks: number = 0;
+  timeLeft: number = 60;
+  interval: any;
   isSubmitted: boolean = false;
+  isExamConcluded: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private resultService: ResultService,
     private userService: UserService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private location: LocationStrategy
   ) {}
   ngOnInit() {
+    // this.disableBackAction();
     this.getTestDetails();
     this.getUserDetails();
+    this.startTimer();
     this.toggleQuestions();
+    this.goToTests();
+  }
+
+  disableBackAction() {
+    history.pushState(null, null, window.location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, window.location.href);
+    });
   }
 
   getTestDetails() {
@@ -51,7 +66,7 @@ export class TestsComponent implements OnInit {
     );
   }
 
-  toggleQuestions() {
+  toggleQuestions(callback?: () => void) {
     if (
       this.selectedTest.testQuestions &&
       this.selectedTest.testQuestions.length > 0
@@ -61,16 +76,36 @@ export class TestsComponent implements OnInit {
           this.isSubmitted = false;
           this.questions = [];
           this.questions.push(this.selectedTest.testQuestions[i]);
-          // if (this.selectedTest.testQuestions.length - 1 === i) {
-          //   this.alertService.showSuccessAlert(() => {
-          //     this.router.navigate(["userprofile/result"], {
-          //       replaceUrl: true,
-          //     });
-          //   }, true);
-          // }
-        }, i * 10000);
+          if (this.selectedTest.testQuestions.length - 1 === i) {
+            if (callback) {
+              callback();
+            }
+          }
+        }, i * 10000); //1 minute 60000
       }
     }
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 60;
+      }
+    }, 1000);
+  }
+
+  goToTests() {
+    this.toggleQuestions(() => {
+      setTimeout(() => {
+        this.alertService.showSuccessAlert(() => {
+          this.router.navigate(["userprofile/scheduled-tests"], {
+            replaceUrl: true,
+          });
+        }, true);
+      }, 10000);
+    });
   }
 
   getMaxMarks() {

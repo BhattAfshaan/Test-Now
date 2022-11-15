@@ -1,123 +1,183 @@
 <div class="container-fluid">
-  <div
-    style="
-      border: 2px solid cornflowerblue;
-      margin: 20px;
-      padding: 16px;
-      border-radius: 12px;
-    "
-  >
-    <div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Subject</th>
-            <th scope="col">Test Code</th>
-            <th scope="col">Test Name</th>
-            <th scope="col">Total No. Of Questions</th>
-            <th scope="col">Min Marks</th>
-            <th scope="col">Max Marks</th>
-            <th scope="col">Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>{{ selectedTest?.subjectName }}</th>
-            <th>{{ selectedTest.testCode }}</th>
-            <th>{{ selectedTest.testName }}</th>
-            <th>{{ selectedTest.testQuestions.length }}</th>
-            <td>{{ minMarks }}</td>
-            <td>{{ maxMarks }}</td>
-            <td>{{ selectedTest.testQuestions.length }} Minutes</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card border-success">
-            <div class="card-header">Question</div>
-            <div class="card-body">
-              <div>
-                <form
-                  #questionForm="ngForm"
-                  (ngSubmit)="onSubmit(questionForm)"
-                >
-                  <table
-                    *ngFor="let question of questions"
-                    style="width: 100%; background-color: azure"
+  <div class="d-flex justify-content-md-center align-items-center vh-100">
+    <div
+      style="
+        border: 2px solid cornflowerblue;
+        margin: 15px;
+        padding: 16px;
+        border-radius: 12px;
+        width: 100%;
+      "
+    >
+      <div>
+        <table style="margin-top: 1rem" class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">
+                <h4 style="margin: 0">Subject</h4>
+              </th>
+              <th scope="col"><h4 style="margin: 0">Test Code</h4></th>
+              <th scope="col"><h4 style="margin: 0">Test Name</h4></th>
+              <th scope="col">
+                <h4 style="margin: 0">Total No. Of Questions</h4>
+              </th>
+              <th scope="col"><h4 style="margin: 0">Min Marks</h4></th>
+              <th scope="col"><h4 style="margin: 0">Max Marks</h4></th>
+              <th scope="col"><h4 style="margin: 0">Duration</h4></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h5 style="margin: 0">{{ selectedTest?.subjectName }}</h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">{{ selectedTest.testCode }}</h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">{{ selectedTest.testName }}</h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">
+                  {{ selectedTest.testQuestions.length }}
+                </h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">
+                  {{ minMarks }}
+                </h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">
+                  {{ maxMarks }}
+                </h5>
+              </td>
+              <td>
+                <h5 style="margin: 0">
+                  {{ selectedTest.testQuestions.length }} Minutes
+                </h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row">
+          <div style="margin-top: 3rem; margin-bottom: 3rem" class="col-md-12">
+            <div class="card border-success">
+              <div class="card-header">
+                <h4 style="margin: 0">Question</h4>
+                <div>{{ timeLeft }}</div>
+              </div>
+              <div class="card-body" style="background-color: azure">
+                <div>
+                  <form
+                    #questionForm="ngForm"
+                    (ngSubmit)="onSubmit(questionForm)"
                   >
-                    <tr>
-                      <td>{{ question.questionDescription }}</td>
-                    </tr>
-                    <tr>
-                      <td>
+                    <table
+                      *ngFor="let question of questions"
+                      style="
+                        width: 80%;
+                        margin: auto;
+                        border-collapse: separate;
+                        border-spacing: 0 20px;
+                      "
+                    >
+                      <tr>
+                        <td>
+                          <h4>{{ question.questionDescription }} ?</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 style="margin: 0">
+                            <input
+                              type="radio"
+                              name="uanswer"
+                              value="{{ question.optionOne }}"
+                              [(ngModel)]="uanswer"
+                            />
+                            <span style="margin-left: 10px">
+                              {{ question.optionOne }}
+                            </span>
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 style="margin: 0">
+                            <input
+                              type="radio"
+                              name="uanswer"
+                              value="{{ question.optionTwo }}"
+                              [(ngModel)]="uanswer"
+                            />
+                            <span style="margin-left: 10px">
+                              {{ question.optionTwo }}
+                            </span>
+                          </h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 style="margin: 0">
+                            <input
+                              type="radio"
+                              name="uanswer"
+                              value="{{ question.optionThree }}"
+                              [(ngModel)]="uanswer"
+                            />
+                            <span style="margin-left: 10px">
+                              {{ question.optionThree }}
+                            </span>
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 style="margin: 0">
+                            <input
+                              type="radio"
+                              name="uanswer"
+                              value="{{ question.optionFour }}"
+                              [(ngModel)]="uanswer"
+                            />
+                            <span style="margin-left: 10px">
+                              {{ question.optionFour }}
+                            </span>
+                          </h5>
+                        </td>
                         <input
-                          type="radio"
-                          name="uanswer"
-                          value="{{ question.optionOne }}"
-                          [(ngModel)]="uanswer"
-                        />{{ question.optionOne }}
-                      </td>
-                      <td>
-                        <input
-                          type="radio"
-                          name="uanswer"
-                          value="{{ question.optionTwo }}"
-                          [(ngModel)]="uanswer"
-                        />{{ question.optionTwo }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input
-                          type="radio"
-                          name="uanswer"
-                          value="{{ question.optionThree }}"
-                          [(ngModel)]="uanswer"
-                        />{{ question.optionThree }}
-                      </td>
-                      <td>
-                        <input
-                          type="radio"
-                          name="uanswer"
-                          value="{{ question.optionFour }}"
-                          [(ngModel)]="uanswer"
-                        />{{ question.optionFour }}
-                      </td>
-                      <input
-                        type="hidden"
-                        name="canswer"
-                        [(ngModel)]="question.correctAnswer"
-                      />
-                      <input
-                        type="hidden"
-                        name="marks"
-                        [(ngModel)]="question.marks"
-                      />
-                      <input
-                        type="hidden"
-                        name="questionID"
-                        [(ngModel)]="question._id"
-                      />
-                    </tr>
-                    <tr style="text-align: center">
-                      <td colspan="3">
-                        <input
-                          [disabled]="isSubmitted"
-                          type="submit"
-                          value="submit"
-                          class="btn btn-dark"
+                          type="hidden"
+                          name="canswer"
+                          [(ngModel)]="question.correctAnswer"
                         />
-                      </td>
-                    </tr>
-                  </table>
-                </form>
+                        <input
+                          type="hidden"
+                          name="marks"
+                          [(ngModel)]="question.marks"
+                        />
+                        <input
+                          type="hidden"
+                          name="questionID"
+                          [(ngModel)]="question._id"
+                        />
+                      </tr>
+                      <tr style="text-align: center">
+                        <td colspan="3">
+                          <input
+                            [disabled]="isSubmitted"
+                            type="submit"
+                            value="Submit"
+                            class="btn btn-primary btn-lg"
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
   </div>
 </div>
