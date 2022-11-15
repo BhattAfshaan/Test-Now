@@ -33,10 +33,10 @@ export class TestsComponent implements OnInit {
     private location: LocationStrategy
   ) {}
   ngOnInit() {
-    // this.disableBackAction();
+    this.disableBackAction();
     this.getTestDetails();
     this.getUserDetails();
-    this.startTimer();
+    // this.startTimer();
     this.toggleQuestions();
     this.goToTests();
   }
@@ -81,7 +81,7 @@ export class TestsComponent implements OnInit {
               callback();
             }
           }
-        }, i * 10000); //1 minute 60000
+        }, i * 60000); //1 minute 60000
       }
     }
   }
