@@ -5,31 +5,53 @@
   #signUpForm="ngForm"
   (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)"
 >
-  <div class="form-group">
-    <select
-      [(ngModel)]="userService.selectedUser.department"
-      name="department"
-      class="form-control"
-      placeholder="Select department"
+  <div class="form-group" style="margin-top: 1rem">
+    <div
+      style="
+        margin-left: 30px;
+        margin-right: 30px;
+        display: flex;
+        align-items: baseline;
+      "
     >
-      <option disabled selected value="undefined">Select department</option>
-      <option *ngFor="let department of departments" [ngValue]="department">
-        {{ department.departmentName }}
-      </option>
-    </select>
+      <label style="margin-right: 10px" for="department">Department</label>
+      <select
+        style="background-color: #f6f6f6"
+        [(ngModel)]="userService.selectedUser.department"
+        name="department"
+        class="form-control"
+        placeholder="Select department"
+      >
+        <option disabled selected value="undefined">Select department</option>
+        <option *ngFor="let department of departments" [ngValue]="department">
+          {{ department.departmentName }}
+        </option>
+      </select>
+    </div>
   </div>
   <div class="form-group">
-    <select
-      [(ngModel)]="userService.selectedUser.course"
-      name="course"
-      class="form-control"
-      placeholder="Select course"
+    <div
+      style="
+        margin-left: 30px;
+        margin-right: 30px;
+        display: flex;
+        align-items: baseline;
+      "
     >
-      <option disabled selected value="undefined">Select course</option>
-      <option *ngFor="let course of courses" [ngValue]="course">
-        {{ course.courseTitle }}
-      </option>
-    </select>
+      <label style="margin-right: 10px" for="course">Course</label>
+      <select
+        style="background-color: #f6f6f6"
+        [(ngModel)]="userService.selectedUser.course"
+        name="course"
+        class="form-control"
+        placeholder="Select course"
+      >
+        <option disabled selected value="undefined">Select course</option>
+        <option *ngFor="let course of courses" [ngValue]="course">
+          {{ course.courseTitle }}
+        </option>
+      </select>
+    </div>
   </div>
   <input
     type="text"

@@ -5,6 +5,7 @@ import { DepartmentService } from "../../shared/departmentService";
 import { UserService } from "../../shared/user.service";
 import { Course } from "../../shared/courseModel";
 import { CourseService } from "../../shared/courseService";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-sign-up",
@@ -22,7 +23,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     public userService: UserService,
     private departmentService: DepartmentService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -46,7 +48,10 @@ export class SignUpComponent implements OnInit {
     this.userService.postUser(form.value).subscribe(
       (res) => {
         this.showSucessMessage = true;
-        setTimeout(() => (this.showSucessMessage = false), 4000);
+        setTimeout(() => {
+          this.showSucessMessage = false;
+          this.router.navigateByUrl("/login");
+        }, 2000);
         this.resetForm(form);
       },
       (err) => {
