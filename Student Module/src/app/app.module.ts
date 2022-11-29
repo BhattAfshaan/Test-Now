@@ -22,13 +22,40 @@ import { AuthInterceptor } from "./auth/auth.interceptor";
 
 import { ResultdetailComponent } from "./user-profile/resultdetail/resultdetail.component";
 import { TestsComponent } from "./user-profile/tests/tests.component";
-import { ScheduledTestsComponent } from './user-profile/scheduled-tests/scheduled-tests.component';
+import { ScheduledTestsComponent } from "./user-profile/scheduled-tests/scheduled-tests.component";
 
 // import { Config, CountdownModule } from "ngx-countdown";
 // import { CountdownConfig } from "ngx-countdown/src/countdown.config";
 // function countdownConfigFactory(): Config {
 //   return { template: `$!h!:$!m!:$!s!` };
 // }
+
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderConfig,
+  SPINNER,
+  POSITION,
+  PB_DIRECTION,
+  NgxUiLoaderRouterModule,
+  NgxUiLoaderHttpModule,
+} from "ngx-ui-loader";
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  blur: 0,
+  fgsColor: "#6495ed",
+  fgsPosition: "center-center",
+  fgsSize: 80,
+  fgsType: "three-strings",
+  overlayColor: "rgba(40, 40, 40, 0.8)",
+  pbColor: "#6495ed",
+  pbDirection: "ltr",
+  pbThickness: 2,
+  hasProgressBar: true,
+  text: "Loading...",
+  textColor: "#FFFFFF",
+  textPosition: "center-center",
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +71,8 @@ import { ScheduledTestsComponent } from './user-profile/scheduled-tests/schedule
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule,
     HttpClientModule,
     // CountdownModule,
   ],
